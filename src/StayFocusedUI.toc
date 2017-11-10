@@ -1,0 +1,8 @@
+## Interface: 70300
+## Title: Stay Focused UI
+## Notes: minimalistic UI replacement
+## Author: stayfocusedongame
+## Version: 171016-00001-alpha
+## DefaultState: Enabled
+
+StayFocusedUI.xml
