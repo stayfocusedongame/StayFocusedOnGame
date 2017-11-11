@@ -1,16 +1,18 @@
 ---
 --- Created by stayfocusedongame.
---- DateTime: 16/10/2017 19:50
+--- DateTime: 2017/11/11 11:00
 ---
 STAYFOCUSED, STAYFOCUSEDEVENTS = CreateFrame("FRAME", "STAYFOCUSED"), {};
 LibItemLevel = LibStub:GetLibrary("LibItemLevel.7000");
 token = "";
 
---- Hidden frame
+--- TECH-001 :
+-- Create hidden frame attached to UIParent for secure hiding ui elements
 STAYFOCUSED_HIDE = CreateFrame("FRAME", "STAYFOCUSED_HIDE", UIParent);
 STAYFOCUSED_HIDE:Hide();
 
---- Move elements function
+--- TECH-002 :
+-- Add a centralized moving function with frame, parent, point, relative to, relative point, x offset, y offset and scale options
 function MoveElement(frame, parent, point, relativeto, relativepoint, xoffset, yoffset, scale)
     if parent ~= nil then
         frame:SetParent(parent);
@@ -22,7 +24,9 @@ function MoveElement(frame, parent, point, relativeto, relativepoint, xoffset, y
     end;
 end;
 
---- FPS frame
+--- MOD-UI-001 :
+-- Move FPS frame on bottom left corner
+-- Associated with SLASH-CMD-004
 FramerateLabel:ClearAllPoints();
 FramerateLabel:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 0, 0);
 FramerateLabel:Hide();
@@ -30,7 +34,9 @@ FramerateText:ClearAllPoints();
 FramerateText:SetPoint("LEFT", FramerateLabel, "RIGHT");
 FramerateText:Hide();
 
---- Screen grid frame
+--- TECH-003 :
+-- Create a screen grid frame with colored lines to align ui elements
+-- Associated with SLASH-CMD-005 and SLASH-CMD-006
 STAYFOCUSED_GRID = CreateFrame("FRAME", "STAYFOCUSED_GRID", UIParent);
 STAYFOCUSED_GRID:SetAllPoints(UIParent);
 STAYFOCUSED_GRID:Hide();
@@ -52,21 +58,29 @@ for i = 0, 64 do
     vertical:SetPoint("BOTTOMRIGHT", STAYFOCUSED_GRID, "TOPRIGHT", 0, -i * line - 1);
 end;
 
---- Enable lua debug
+--- TECH-004 :
+-- Set game variables to show LUA warnings and LUA errors
+-- Print variables status in chat
+-- Associated with SLASH-CMD-002
 function LuaDebugOn()
     SetCVar("scriptErrors", 1);
     SetCVar("scriptWarnings", 1);
     print("scriptErrors enabled");
 end;
 
---- Disable lua debug
+--- TECH-005 :
+-- Set game variables to hide LUA warnings and LUA errors
+-- Print variables status in chat
+-- Associated with SLASH-CMD-003
 function LuaDebugOff()
     SetCVar("scriptErrors", 0);
     SetCVar("scriptWarnings", 0);
     print("scriptErrors disabled");
 end;
 
---- Ready check
+--- FUNC-001 :
+-- Perform ready check when in raid or group, if player is not leader or assistant, print help message in chat
+-- Associated with SLASH-CMD-007
 function AskIfReady()
     if GetLocale() == "frFR" then
         isNotRaidLeaderOrAssist = "Vous devez être leader ou assistant pour effectuer un readycheck !";
@@ -80,7 +94,12 @@ function AskIfReady()
     end;
 end;
 
---- Pull
+--- FUNC-002 :
+-- Perform 10 sec boss pull countdown
+-- Send raid chat message - or self whisper - at beginning, at pre potion (1 sec) and at pulling
+-- Synchronize with DBM and BIGWIGS boss pull timer
+-- Can be canceled
+-- Associated with SLASH-CMD-008 and SLASH-CMD-009
 cancel = false;
 function PullOnChat(time)
     STAYFOCUSED_PULL = CreateFrame("FRAME", nil);
@@ -129,7 +148,34 @@ function PullOnChat(time)
     end);
 end;
 
---- Slash commands
+--- SLASH-CMD-001 :
+-- Add in game slash command (/sf rl) to reload ui
+--- SLASH-CMD-002 :
+-- Add in game slash command (/sf debugon) to enable LUA warnings and LUA errors
+-- Associated with TECH-004
+--- SLASH-CMD-003 :
+-- Add in game slash command (/sf debugon) to hide LUA warnings and LUA errors
+-- Associated with TECH-005
+--- SLASH-CMD-004 :
+-- Add in game slash command (/sf fps) to enable and disable FPS frame
+-- Associated with MOD-UI-001
+--- SLASH-CMD-005 :
+-- Add in game slash command (/sf gridoff) to hide screen grid frame
+-- Associated with TECH-003
+--- SLASH-CMD-006 :
+-- Add in game slash command (/sf gridon) to show screen grid frame
+-- Associated with TECH-003
+--- SLASH-CMD-007 :
+-- Add in game slash command (/sf rc) to perform ready check
+-- Associated with FUNC-001
+--- SLASH-CMD-008 :
+-- Add in game slash command (/sf pull) to start boss pull countdown
+-- Associated with FUNC-002
+--- SLASH-CMD-009 :
+-- Add in game slash command (/sf stop) to stop boss pul countdown
+-- Associated with FUNC-002
+--- SLASH-CMD-010 :
+-- Send help message with all available slash commands when use an unknown slash command
 SLASH_SF1 = "/sf";
 SlashCmdList.SF = function(option)
     if option == "rl" then
@@ -170,7 +216,9 @@ SlashCmdList.SF = function(option)
     end;
 end;
 
---- Send chat to raid warning function
+--- TECH-006 :
+-- Add a centralized function witch send as a raid warning with message, sender, canal, sound options
+-- Associated with FUNC-005
 function SendAs(message, sender, canal, sound)
     name = string.gsub(sender, "-%" .. string.gsub(GetRealmName(), " ", ""), "");
     RaidNotice_AddMessage(RaidWarningFrame, "\\" .. canal .. " [" .. date("%H:%M") .. " " .. name .. "] " .. message, ChatTypeInfo[canal]);
@@ -179,12 +227,8 @@ function SendAs(message, sender, canal, sound)
     end;
 end;
 
---- Console variables
-SetCVar("raidFramesHeight", 72); -- 36 to 72
-SetCVar("raidFramesWidth", 72); -- 72 to 144
-SetCVar("raidOptionIsShown", 1);
-SetCVar("raidOptionLocked", 1);
-SetCVar("raidOptionSortMode", "groups");
+--- TECH-007 :
+-- Set game variables (raid frames, advanced combat logging, floating combat text, sound, camera, threat, screenshot ...)
 SetCVar("ActionButtonUseKeyDown", 1);
 SetCVar("ShowNamePlateLoseAggroFlash", 1);
 SetCVar("Sound_AmbienceVolume", 0.5);
@@ -220,18 +264,8 @@ SetCVar("autoInteract", 1);
 SetCVar("autoLootDefault", 1);
 SetCVar("autoLootRate", 0.1);
 SetCVar("cameraDistanceMaxZoomFactor", 2.6);
-SetCVar("fullSizeFocusFrame", 0);
-SetCVar("useCompactPartyFrames", 1);
 SetCVar("cameraSavedDistance", 25);
 SetCVar("cameraSavedPitch", 33);
-SetCVar("raidOptionSortMode", "groups");
-SetCVar("raidOptionKeepGroupsTogether", 1);
-SetCVar("raidOptionLocked", 1);
-SetCVar("raidFramesDisplayPowerBars", 1);
-SetCVar("raidFramesHeight", 72);
-SetCVar("raidFramesHealthText", "percent");
-SetCVar("raidOptionShowBorders", 0);
-SetCVar("raidFramesDisplayClassColor", 1);
 SetCVar("chatBubbles", 1);
 SetCVar("chatBubblesParty", 0);
 SetCVar("chatStyle", "im");
@@ -261,6 +295,7 @@ SetCVar("floatingCombatTextPetMeleeDamage", 0);
 SetCVar("floatingCombatTextReactives", 0);
 SetCVar("floatingCombatTextRepChanges", 1);
 SetCVar("floatingCombatTextSpellMechanics", 0);
+SetCVar("fullSizeFocusFrame", 0);
 SetCVar("gametip", 0);
 SetCVar("guildMemberNotify", 1);
 SetCVar("guildShowOffline", 0);
@@ -273,13 +308,26 @@ SetCVar("nameplateOthertopInset", -1);
 SetCVar("profanityFilter", 0);
 SetCVar("raidFramesDisplayAggroHighlight", 1);
 SetCVar("raidFramesDisplayClassColor", 1);
+SetCVar("raidFramesDisplayClassColor", 1);
 SetCVar("raidFramesDisplayOnlyDispellableDebuffs", 0);
 SetCVar("raidFramesDisplayPowerBars", 1);
+SetCVar("raidFramesDisplayPowerBars", 1);
 SetCVar("raidFramesHealthText", "percent");
+SetCVar("raidFramesHealthText", "percent");
+SetCVar("raidFramesHeight", 72);
+SetCVar("raidFramesHeight", 72); -- 36 to 72
+SetCVar("raidFramesWidth", 72); -- 72 to 144
 SetCVar("raidOptionDisplayMainTankAndAssist", 1);
 SetCVar("raidOptionDisplayPets", 0);
+SetCVar("raidOptionIsShown", 1);
 SetCVar("raidOptionKeepGroupsTogether", 1);
+SetCVar("raidOptionKeepGroupsTogether", 1);
+SetCVar("raidOptionLocked", 1);
+SetCVar("raidOptionLocked", 1);
 SetCVar("raidOptionShowBorders", 0);
+SetCVar("raidOptionShowBorders", 0);
+SetCVar("raidOptionSortMode", "groups");
+SetCVar("raidOptionSortMode", "groups");
 SetCVar("rotateMinimap", 1);
 SetCVar("screenshotFormat", "jpg");
 SetCVar("screenshotQuality", 10);
@@ -303,12 +351,14 @@ SetCVar("threatWorldText", 1);
 SetCVar("toastDuration", 0);
 SetCVar("trackQuestSorting", "proximity");
 SetCVar("useCompactPartyFrames", 1);
+SetCVar("useCompactPartyFrames", 1);
 SetCVar("violenceLevel", 5);
 SetCVar("whisperMode", "popout_and_inline");
 SetCVar("worldPreloadNonCritical", 0);
 SetCVar("xpBarText", 1);
 
---- Enable mousewheel zoom
+--- FUNC-003 :
+-- Enable mousewheel zoom on minimap
 Minimap:EnableMouseWheel(true);
 Minimap:SetScript('OnMouseWheel', function(self, delta)
     if delta > 0 then
@@ -318,7 +368,8 @@ Minimap:SetScript('OnMouseWheel', function(self, delta)
     end;
 end);
 
---- Merge calendar and tracking
+--- MOD-UI-002 :
+-- Merge minimap's calendar button and minimap's tracking button
 MiniMapTracking:ClearAllPoints();
 MiniMapTracking:SetAllPoints(GameTimeFrame);
 MiniMapTrackingButton:SetScript("OnMouseDown", function(self, btn)
@@ -327,10 +378,12 @@ MiniMapTrackingButton:SetScript("OnMouseDown", function(self, btn)
     end;
 end);
 
---- Scale garrison button
+--- MOD-UI-003 :
+-- Adjust hall and garrison scales
 GarrisonLandingPageMinimapButton:SetScale(0.65);
 
---- Clean bars and error frame
+--- MOD-UI-004 :
+-- Hide UIErrorFrame, unwanted bar elements and unwanted minimap elements
 for _, f in next, { UIErrorsFrame, PossessBackground1, PossessBackground2, SlidingActionBarTexture0, SlidingActionBarTexture1, StanceBarLeft, StanceBarMiddle, StanceBarRight, ActionButton1NormalTexture, MultiBarBottomLeftButton1NormalTexture, MultiBarBottomLeftButton1FloatingBG,
     MultiBarBottomRightButton1NormalTexture, MultiBarBottomRightButton1FloatingBG, MultiBarLeftButton1NormalTexture, MultiBarLeftButton1FloatingBG, MultiBarRightButton1NormalTexture, MultiBarRightButton1FloatingBG, ActionButton2NormalTexture, MultiBarBottomLeftButton2NormalTexture,
     MultiBarBottomLeftButton2FloatingBG, MultiBarBottomRightButton2NormalTexture, MultiBarBottomRightButton2FloatingBG, MultiBarLeftButton2NormalTexture, MultiBarLeftButton2FloatingBG, MultiBarRightButton2NormalTexture, MultiBarRightButton2FloatingBG, ActionButton3NormalTexture,
@@ -352,7 +405,9 @@ for _, f in next, { UIErrorsFrame, PossessBackground1, PossessBackground2, Slidi
     f:Hide();
 end;
 
---- Move objective tracker
+--- MOD-UI-005 :
+-- Move objective tracker on upper left corner
+-- Set objective tracker max height at 75% screen
 delpos = ObjectiveTrackerFrame.ClearAllPoints;
 setpos = ObjectiveTrackerFrame.SetPoint;
 hooksecurefunc(ObjectiveTrackerFrame, "SetPoint", function(self, anchorpoint, relativeto, xoffset, yoffset)
@@ -361,7 +416,8 @@ hooksecurefunc(ObjectiveTrackerFrame, "SetPoint", function(self, anchorpoint, re
     self:SetHeight(GetScreenHeight() * .75);
 end);
 
---- Clean chat
+--- MOD-UI-006 :
+-- Clean chat frame
 for i = 1, NUM_CHAT_WINDOWS do
     _G["ChatFrame" .. i .. "EditBoxLeft"]:SetAlpha(0);
     _G["ChatFrame" .. i .. "EditBoxRight"]:SetAlpha(0);
@@ -381,7 +437,8 @@ for _, value in ipairs(CHAT_FRAME_TEXTURES) do
     end;
 end;
 
---- Move chat
+--- MOD-UI-007 :
+-- Move chat frame to lower left corner
 ChatFrame1:ClearAllPoints();
 ChatFrame1:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 0, -150);
 ChatFrame1.ClearAllPoints = function()
@@ -390,141 +447,146 @@ ChatFrame1.SetPoint = function()
 end;
 ChatFrame1:SetUserPlaced(true);
 
---- Move player frame
+--- MOD-UI-008 :
+-- Move player, target and focus frames on right side closer to center
 MoveElement(PlayerFrame, nil, "CENTER", UIParent, "CENTER", 200, -110, nil);
 PlayerFrame:SetUserPlaced(true);
 PlayerFrame.SetPoint = function()
 end;
-
---- Move target frame
 MoveElement(TargetFrame, nil, "CENTER", UIParent, "CENTER", 300, -20, nil);
 TargetFrame:SetUserPlaced(true);
 TargetFrame.SetPoint = function()
 end;
-
---- Move focus frame
 MoveElement(FocusFrame, nil, "CENTER", UIParent, "CENTER", 363, 80, nil);
 FocusFrame:SetUserPlaced(true);
 FocusFrame.SetPoint = function()
 end;
 
---- Move cast bars
+--- MOD-UI-009 :
+-- Move, adjust scales and clean cast bars (player, target and focus)
 CastingBarFrame:HookScript("OnShow", function(self)
     self:ClearAllPoints();
     self:SetPoint("CENTER", UIParent, "CENTER", 0, 0);
     self.SetPoint = function()
-    end
-    self:SetHeight(12)
-    self:SetWidth(200)
+    end;
+    self:SetHeight(12);
+    self:SetWidth(200);
     self.Border:Hide(0);
     self.BorderShield:Hide(0);
     self.Flash:Hide(0);
     self.Flash:SetAlpha(0);
     self.Flash:SetTexture(nil);
-    self.Text:ClearAllPoints()
-    self.Text:SetPoint("CENTER", 0, 0)
-    self.Text:SetFont("Fonts\\FRIZQT__.TTF", 11, "OUTLINE")
+    self.Text:ClearAllPoints();
+    self.Text:SetPoint("CENTER", 0, 0);
+    self.Text:SetFont("Fonts\\FRIZQT__.TTF", 11, "OUTLINE");
 end);
-
 TargetFrameSpellBar:HookScript("OnShow", function(self)
-    self:ClearAllPoints()
-    self:SetPoint("CENTER", UIParent, "CENTER", 0, 20)
+    self:ClearAllPoints();
+    self:SetPoint("CENTER", UIParent, "CENTER", 0, 20);
     self.SetPoint = function()
-    end
-    self:SetHeight(12)
-    self:SetWidth(200)
+    end;
+    self:SetHeight(12);
+    self:SetWidth(200);
     self.Border:Hide(0);
     self.BorderShield:Hide(0);
     self.Flash:Hide(0);
     self.Flash:SetAlpha(0);
     self.Flash:SetTexture(nil);
-    self.Text:ClearAllPoints()
-    self.Text:SetPoint("CENTER", 0, 0)
-    self.Text:SetFont("Fonts\\FRIZQT__.TTF", 11, "OUTLINE")
+    self.Text:ClearAllPoints();
+    self.Text:SetPoint("CENTER", 0, 0);
+    self.Text:SetFont("Fonts\\FRIZQT__.TTF", 11, "OUTLINE");
 end);
-
 FocusFrameSpellBar:HookScript("OnShow", function(self)
-    self:ClearAllPoints()
-    self:SetPoint("CENTER", UIParent, "CENTER", 0, 40)
+    self:ClearAllPoints();
+    self:SetPoint("CENTER", UIParent, "CENTER", 0, 40);
     self.SetPoint = function()
-    end
-    self:SetHeight(12)
-    self:SetWidth(200)
+    end;
+    self:SetHeight(12);
+    self:SetWidth(200);
     self.Border:Hide(0);
     self.BorderShield:Hide(0);
     self.Flash:Hide(0);
     self.Flash:SetAlpha(0);
     self.Flash:SetTexture(nil);
-    self.Text:ClearAllPoints()
-    self.Text:SetPoint("CENTER", 0, 0)
-    self.Text:SetFont("Fonts\\FRIZQT__.TTF", 11, "OUTLINE")
+    self.Text:ClearAllPoints();
+    self.Text:SetPoint("CENTER", 0, 0);
+    self.Text:SetFont("Fonts\\FRIZQT__.TTF", 11, "OUTLINE");
 end);
 
--- Show class icons portraits
+--- MOD-UI-010 :
+-- Replace portraits by class icons (player, target and focus)
 hooksecurefunc("UnitFramePortrait_Update", function(self)
     if self.portrait then
         if UnitIsPlayer(self.unit) then
-            local t = CLASS_ICON_TCOORDS[select(2, UnitClass(self.unit))]
+            local t = CLASS_ICON_TCOORDS[select(2, UnitClass(self.unit))];
             if t then
-                self.portrait:SetTexture("Interface\\TargetingFrame\\UI-Classes-Circles")
-                self.portrait:SetTexCoord(unpack(t))
-            end
+                self.portrait:SetTexture("Interface\\TargetingFrame\\UI-Classes-Circles");
+                self.portrait:SetTexCoord(unpack(t));
+            end;
         else
-            self.portrait:SetTexCoord(0, 1, 0, 1)
-        end
-    end
-end)
+            self.portrait:SetTexCoord(0, 1, 0, 1);
+        end;
+    end;
+end);
 
---- class color name bg
-local colornamebg = CreateFrame("FRAME")
-colornamebg:RegisterEvent("GROUP_ROSTER_UPDATE")
-colornamebg:RegisterEvent("PLAYER_TARGET_CHANGED")
-colornamebg:RegisterEvent("PLAYER_FOCUS_CHANGED")
-colornamebg:RegisterEvent("UNIT_FACTION")
-
+--- MOD-UI-011 :
+-- Colorize unit frames background with class color (player, focus and target)
+local colornamebg = CreateFrame("FRAME");
+colornamebg:RegisterEvent("GROUP_ROSTER_UPDATE");
+colornamebg:RegisterEvent("PLAYER_TARGET_CHANGED");
+colornamebg:RegisterEvent("PLAYER_FOCUS_CHANGED");
+colornamebg:RegisterEvent("UNIT_FACTION");
 local function eventHandler(self, event, ...)
+    if PlayerFrame:IsShown() and not PlayerFrame.bg then
+        c = RAID_CLASS_COLORS[select(2, UnitClass("player"))];
+        bg = PlayerFrame:CreateTexture();
+        bg:SetPoint("TOPLEFT", PlayerFrameBackground);
+        bg:SetPoint("BOTTOMRIGHT", PlayerFrameBackground, 0, 22);
+        bg:SetTexture(TargetFrameNameBackground:GetTexture());
+        bg:SetVertexColor(c.r, c.g, c.b);
+        PlayerFrame.bg = true;
+    end;
     if UnitIsPlayer("target") then
-        c = RAID_CLASS_COLORS[select(2, UnitClass("target"))]
-        TargetFrameNameBackground:SetVertexColor(c.r, c.g, c.b)
-    end
+        c = RAID_CLASS_COLORS[select(2, UnitClass("target"))];
+        TargetFrameNameBackground:SetVertexColor(c.r, c.g, c.b);
+    end;
     if UnitIsPlayer("focus") then
-        c = RAID_CLASS_COLORS[select(2, UnitClass("focus"))]
-        FocusFrameNameBackground:SetVertexColor(c.r, c.g, c.b)
-    end
-end
-
-colornamebg:SetScript("OnEvent", eventHandler)
-
+        c = RAID_CLASS_COLORS[select(2, UnitClass("focus"))];
+        FocusFrameNameBackground:SetVertexColor(c.r, c.g, c.b);
+    end;
+end;
+colornamebg:SetScript("OnEvent", eventHandler);
 for _, BarTextures in pairs({ TargetFrameNameBackground, FocusFrameNameBackground }) do
-    BarTextures:SetTexture("Interface\\TargetingFrame\\UI-StatusBar")
-end
+    BarTextures:SetTexture("Interface\\TargetingFrame\\UI-StatusBar");
+end;
 
---- Class color hp
+--- MOD-UI-012 :
+-- Colorize unit frames health bar with class color (player, target and focus)
 local function colour(statusbar, unit)
-    local _, class, c
+    local _, class, c;
     if UnitIsPlayer(unit) and UnitIsConnected(unit) and unit == statusbar.unit and UnitClass(unit) then
-        _, class = UnitClass(unit)
-        c = CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[class] or RAID_CLASS_COLORS[class]
-        statusbar:SetStatusBarColor(c.r, c.g, c.b)
-        PlayerFrameHealthBar:SetStatusBarColor(0, 1, 0)
-    end
-end
-
+        _, class = UnitClass(unit);
+        c = CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[class] or RAID_CLASS_COLORS[class];
+        statusbar:SetStatusBarColor(c.r, c.g, c.b);
+        PlayerFrameHealthBar:SetStatusBarColor(c.r, c.g, c.b);
+    end;
+end;
 hooksecurefunc("UnitFrameHealthBar_Update", colour)
 hooksecurefunc("HealthBar_OnValueChanged", function(self)
-    colour(self, self.unit)
-end)
+    colour(self, self.unit);
+end);
 
---- Hide hit indicators
-PlayerHitIndicator:SetText(nil)
+--- MOD-UI-013 :
+-- Hide player and pet hit indicator
+PlayerHitIndicator:SetText(nil);
 PlayerHitIndicator.SetText = function()
-end
-
-PetHitIndicator:SetText(nil)
+end;
+PetHitIndicator:SetText(nil);
 PetHitIndicator.SetText = function()
-end
+end;
 
---- Hide buff and debuff
+--- MOD-UI-014 :
+-- Hide target buff and debuff
 hooksecurefunc("TargetFrame_UpdateAuraPositions", function(self)
     for i = 1, 40 do
         debuff, buff = _G["TargetFrameDebuff" .. i], _G["TargetFrameBuff" .. i];
@@ -536,7 +598,6 @@ hooksecurefunc("TargetFrame_UpdateAuraPositions", function(self)
         end;
     end;
 end);
-
 for i = 1, 40 do
     debuff, buff = _G["TargetFrameDebuff" .. i], _G["TargetFrameBuff" .. i];
     if debuff then
@@ -547,7 +608,8 @@ for i = 1, 40 do
     end;
 end;
 
---- Move bosses frames
+--- MOD-UI-015 :
+-- Move boss frames on left side closer to center
 MoveElement(Boss1TargetFrame, nil, "CENTER", UIParent, "CENTER", -200, -100, 1.1);
 Boss1TargetFrame.SetPoint = function()
 end;
@@ -555,20 +617,18 @@ for i = 2, 5 do
     MoveElement(_G["Boss" .. i .. "TargetFrame"], nil, "RIGHT", _G["Boss" .. (i - 1) .. "TargetFrame"], "BOTTOM", _G["Boss" .. i .. "TargetFrame"]:GetHeight(), _G["Boss" .. i .. "TargetFrame"]:GetHeight() + 50, 1.1);
 end;
 
---- Move arena frames
+--- MOD-UI-016 :
+-- Move arena enemies frames on left side closer to center
 -- use this script to show frames outside of arena
 --[[/run LoadAddOn("Blizzard_ArenaUI") ArenaEnemyFrames:Show() ArenaEnemyFrame1:Show() ArenaEnemyFrame2:Show() ArenaEnemyFrame3:Show() ArenaEnemyFrame1CastingBar:Show() ArenaEnemyFrame2CastingBar:Show() ArenaEnemyFrame3CastingBar:Show()]]
 if LoadAddOn("Blizzard_ArenaUI") then
     ArenaEnemyFrame1:ClearAllPoints();
     ArenaEnemyFrame2:ClearAllPoints();
     ArenaEnemyFrame3:ClearAllPoints();
-
     ArenaEnemyFrames:SetScale(2);
-
     ArenaEnemyFrame1:SetPoint("CENTER", UIParent, "CENTER", -200, 50);
     ArenaEnemyFrame2:SetPoint("CENTER", UIParent, "CENTER", -200, 0);
     ArenaEnemyFrame3:SetPoint("CENTER", UIParent, "CENTER", -200, -50);
-
     ArenaEnemyFrame1.SetPoint = function()
     end;
     ArenaEnemyFrame2.SetPoint = function()
@@ -577,17 +637,21 @@ if LoadAddOn("Blizzard_ArenaUI") then
     end;
 end;
 
---- Hide boss banner
+--- MOD-UI-017 :
+-- Hide boss banner
 BossBanner:UnregisterAllEvents();
 
---- Hide talking head
+--- MOD-UI-018 :
+-- Hide talking head
 if LoadAddOn("Blizzard_TalkingHeadUI") then
     TalkingHeadFrame:SetScript("OnShow", nil);
     TalkingHeadFrame:SetScript("OnHide", nil);
     TalkingHeadFrame:UnregisterAllEvents();
 end;
 
---- Customize ui
+--- MOD-UI-019 :
+-- Colorize action bar, units, minimap with faction color (horde, alliance and neutral)
+-- Replace end caps with customized ones (horde, alliance and neutral)
 function STAYFOCUSEDEVENTS:ADDON_LOADED(...)
     local red, geen, blue;
     local faction, _ = UnitFactionGroup("player");
@@ -626,7 +690,12 @@ function STAYFOCUSEDEVENTS:ADDON_LOADED(...)
     end;
 end;
 
---- Quest accept confirm
+--- FUNC-004 :
+-- Accept quests
+-- Complete quests
+-- Skip quests details
+-- When multiple quest available, stand by for player choice
+-- Stop automation with shift key pressed
 function STAYFOCUSEDEVENTS:QUEST_ACCEPT_CONFIRM(...)
     if IsShiftKeyDown() then
         return
@@ -635,8 +704,6 @@ function STAYFOCUSEDEVENTS:QUEST_ACCEPT_CONFIRM(...)
         StaticPopup_Hide("QUEST_ACCEPT");
     end;
 end;
-
---- Quest autocomplete
 function STAYFOCUSEDEVENTS:QUEST_AUTOCOMPLETE(...)
     if IsShiftKeyDown() then
         return
@@ -650,8 +717,6 @@ function STAYFOCUSEDEVENTS:QUEST_AUTOCOMPLETE(...)
         end;
     end;
 end;
-
---- Quest complete
 function STAYFOCUSEDEVENTS:QUEST_COMPLETE(...)
     if IsShiftKeyDown() then
         return
@@ -661,8 +726,6 @@ function STAYFOCUSEDEVENTS:QUEST_COMPLETE(...)
         end;
     end;
 end;
-
---- Quest detail
 function STAYFOCUSEDEVENTS:QUEST_DETAIL(...)
     if IsShiftKeyDown() then
         return
@@ -674,8 +737,6 @@ function STAYFOCUSEDEVENTS:QUEST_DETAIL(...)
         end;
     end;
 end;
-
---- Quest greeting
 function STAYFOCUSEDEVENTS:QUEST_GREETING(...)
     if IsShiftKeyDown() then
         return
@@ -699,8 +760,6 @@ function STAYFOCUSEDEVENTS:QUEST_GREETING(...)
         end;
     end;
 end;
-
---- Quest progress
 function STAYFOCUSEDEVENTS:QUEST_PROGRESS(...)
     if IsShiftKeyDown() then
         return
@@ -711,67 +770,48 @@ function STAYFOCUSEDEVENTS:QUEST_PROGRESS(...)
     end;
 end;
 
---- Guild chat
+--- FUNC-005 :
+-- Send chat messages in raid warning with specific sound (guild, guild officer, instance, instance leader, party, party leader, raid, raid leader, whisper and battle net)
+-- Associated with TECH-006
 function STAYFOCUSEDEVENTS:CHAT_MSG_GUILD(...)
     SendAs(select(1, ...), select(5, ...), "GUILD", "Interface\\AddOns\\StayFocusedUI\\Sounds\\chatogg");
 end;
-
---- Guild officer chat
 function STAYFOCUSEDEVENTS:CHAT_MSG_OFFICER(...)
     SendAs(select(1, ...), select(5, ...), "GUILD", "Interface\\AddOns\\StayFocusedUI\\Sounds\\chatogg");
 end;
-
---- Instance chat
 function STAYFOCUSEDEVENTS:CHAT_MSG_INSTANCE_CHAT(...)
     SendAs(select(1, ...), select(5, ...), "PARTY", "Interface\\AddOns\\StayFocusedUI\\Sounds\\chat_i.ogg");
 end;
-
---- Instance leader chat
 function STAYFOCUSEDEVENTS:CHAT_MSG_INSTANCE_CHAT_LEADER(...)
     SendAs(select(1, ...), select(5, ...), "PARTY", "Interface\\AddOns\\StayFocusedUI\\Sounds\\chat_i.ogg");
 end;
-
---- Party chat
 function STAYFOCUSEDEVENTS:CHAT_MSG_PARTY(...)
     SendAs(select(1, ...), select(5, ...), "PARTY", "Interface\\AddOns\\StayFocusedUI\\Sounds\\chat_i.ogg");
 end;
-
---- Party leader chat
 function STAYFOCUSEDEVENTS:CHAT_MSG_PARTY_LEADER(...)
     SendAs(select(1, ...), select(5, ...), "PARTY", "Interface\\AddOns\\StayFocusedUI\\Sounds\\chat_i.ogg");
 end;
-
---- Raid chat
 function STAYFOCUSEDEVENTS:CHAT_MSG_RAID(...)
     SendAs(select(1, ...), select(5, ...), "RAID", "Interface\\AddOns\\StayFocusedUI\\Sounds\\chat_i.ogg");
 end;
-
---- Raid leader chat
 function STAYFOCUSEDEVENTS:CHAT_MSG_RAID_LEADER(...)
     SendAs(select(1, ...), select(5, ...), "RAID", "Interface\\AddOns\\StayFocusedUI\\Sounds\\chat_i.ogg");
 end;
-
---- Battle net conversation
 function STAYFOCUSEDEVENTS:CHAT_MSG_BN_CONVERSATION(...)
     SendAs(select(1, ...), select(5, ...), "BN_WHISPER", "Interface\\AddOns\\StayFocusedUI\\Sounds\\chat_w.ogg");
 end;
-
---- Battle Net broadcast
 function STAYFOCUSEDEVENTS:CHAT_MSG_BN_INLINE_TOAST_BROADCAST(...)
     SendAs(select(1, ...), select(5, ...), "BN_WHISPER", "Interface\\AddOns\\StayFocusedUI\\Sounds\\chat_w.ogg");
 end;
-
---- Battle Net whisper chat
 function STAYFOCUSEDEVENTS:CHAT_MSG_BN_WHISPER(...)
     SendAs(select(1, ...), select(5, ...), "BN_WHISPER", "Interface\\AddOns\\StayFocusedUI\\Sounds\\chat_w.ogg");
 end;
-
---- Whisper chat
 function STAYFOCUSEDEVENTS:CHAT_MSG_WHISPER(...)
     SendAs(select(1, ...), select(5, ...), "WHISPER", "Interface\\AddOns\\StayFocusedUI\\Sounds\\chat_w.ogg");
 end;
 
---- Show paper doll item level
+--- MOD-UI-020 :
+-- Show paper doll item level
 function ShowPaperDollItemLevel(self, unit)
     result = "";
     id = self:GetID();
@@ -807,7 +847,9 @@ hooksecurefunc("PaperDollItemSlotButton_Update", function(self)
     ShowPaperDollItemLevel(self, "player");
 end);
 
---- Show bag item level
+--- MOD-UI-021 :
+-- Show weapons and armors item level in bags
+-- Colorize item level when greater than 90% of equipped item level
 function SetContainerItemLevel(button, ItemLink)
     if not button then
         return
@@ -826,7 +868,7 @@ function SetContainerItemLevel(button, ItemLink)
         name, _ = GetItemSpell(ItemLink);
         _, equipped, _ = GetAverageItemLevel();
         if level >= (98 * equipped / 100) then
-            button.levelString:SetTextColor(1, 0, 0);
+            button.levelString:SetTextColor(0, 1, 0);
         else
             button.levelString:SetTextColor(1, 1, 1);
         end;
@@ -847,32 +889,37 @@ hooksecurefunc("ContainerFrame_Update", function(self)
     end;
 end);
 
---- Collapse objectives in pvp
+--- MOD-UI-022 :
+-- Collapse objectives in pvp
 function STAYFOCUSEDEVENTS:PLAYER_ENTERING_WORLD(...)
     if (instanceType == "pvp" or instanceType == "arena") and not ObjectiveTrackerFrame.collapsed then
         ObjectiveTracker_Collapse();
     end;
 end;
 
---- Confirm disenchant roll
+--- FUNC-006 :
+-- Confirm disenchant roll
 function STAYFOCUSEDEVENTS:CONFIRM_DISENCHANT_ROLL(...)
     ConfirmLootRoll(select(1, ...), select(2, ...));
     StaticPopup_Hide("CONFIRM_LOOT_ROLL");
 end;
 
---- Confirm loot roll
+--- FUNC-007 :
+-- Confirm loot roll
 function STAYFOCUSEDEVENTS:CONFIRM_LOOT_ROLL(...)
     ConfirmLootRoll(select(1, ...), select(2, ...));
     StaticPopup_Hide("CONFIRM_LOOT_ROLL");
 end;
 
---- Confirm bind on pickup loot
+--- FUNC-008 :
+-- Confirm bind on pickup loot
 function STAYFOCUSEDEVENTS:LOOT_BIND_CONFIRM(...)
     ConfirmLootSlot(select(1, ...), select(2, ...));
     StaticPopup_Hide("LOOT_BIND");
 end;
 
---- Faster looting
+--- FUNC-009 :
+-- Speed up looting
 function STAYFOCUSEDEVENTS:LOOT_READY(...)
     delay = 0;
     if GetTime() - delay >= 0.3 then
@@ -886,7 +933,8 @@ function STAYFOCUSEDEVENTS:LOOT_READY(...)
     end;
 end;
 
---- Open mails
+--- FUNC-010 :
+-- Open mails except GM's mails and ones with cash on delivery
 function STAYFOCUSEDEVENTS:MAIL_INBOX_UPDATE(...)
     numItems, totalItems = GetInboxNumItems();
     if totalItems == 0 then
@@ -899,14 +947,9 @@ function STAYFOCUSEDEVENTS:MAIL_INBOX_UPDATE(...)
     end;
 end;
 
---- Stop selling
-function STAYFOCUSEDEVENTS:MERCHANT_CLOSED(...)
-    if token then
-        token:Cancel();
-    end;
-end;
-
---- Repair and sell junk
+--- FUNC-011 :
+-- Repair equipment and sell junk when visiting a merchant
+-- Stop selling when merchant window is closed
 function STAYFOCUSEDEVENTS:MERCHANT_SHOW(...)
     repairAllCost, canRepair = GetRepairAllCost();
     if CanMerchantRepair() and canRepair and repairAllCost > 0 then
@@ -926,23 +969,15 @@ function STAYFOCUSEDEVENTS:MERCHANT_SHOW(...)
         end;
     end, 200)
 end;
-
---- Release in pvp
-function STAYFOCUSEDEVENTS:PLAYER_DEAD(...)
-    InstStat, InstType = IsInInstance();
-    if InstStat and InstType == "pvp" and not HasSoulstone() then
-        RepopMe();
-    end;
-end;
-
---- Stop learning loop
-function STAYFOCUSEDEVENTS:TRAINER_CLOSED(...)
+function STAYFOCUSEDEVENTS:MERCHANT_CLOSED(...)
     if token then
         token:Cancel();
     end;
 end;
 
---- Learn
+--- FUNC-012 :
+-- Learn available recipes when visiting a trainer
+-- Stop learning when trainer window is closed
 function STAYFOCUSEDEVENTS:TRAINER_SHOW(...)
     token = C_Timer.NewTicker(math.max(1, 0.01), function()
         if IsTradeskillTrainer() then
@@ -953,19 +988,34 @@ function STAYFOCUSEDEVENTS:TRAINER_SHOW(...)
         end;
     end, 200)
 end;
+function STAYFOCUSEDEVENTS:TRAINER_CLOSED(...)
+    if token then
+        token:Cancel();
+    end;
+end;
 
---- Rare announcer
+--- FUNC-013 :
+-- Release corpse in pvp
+function STAYFOCUSEDEVENTS:PLAYER_DEAD(...)
+    InstStat, InstType = IsInInstance();
+    if InstStat and InstType == "pvp" and not HasSoulstone() then
+        RepopMe();
+    end;
+end;
+
+--- FUNC-014 :
+-- Announce minimap : rares, treasures except garrison cache (raid waning and sound)
 function STAYFOCUSEDEVENTS:VIGNETTE_ADDED(...)
     if GetLocale() == "frFR" then
-        isGarrisonCache = "Cahce du fief";
+        isGarrisonCache = "Cache du fief";
         isDetected = "détecté";
     else
         isGarrisonCache = "Garrison cache";
         isDetected = "detected";
     end;
-    rareID = select(1, ...);
-    if rareID then
-        _, _, name = C_Vignettes.GetVignetteInfoFromInstanceID(rareID);
+    vignetteID = select(1, ...);
+    if vignetteID then
+        _, _, name, _ = C_Vignettes.GetVignetteInfoFromInstanceID(rareID);
         if name ~= nil and name ~= isGarrisonCache then
             message = "|cff00ff00" .. name .. " " .. isDetected .. "!|r";
             RaidNotice_AddMessage(RaidWarningFrame, message, ChatTypeInfo["RAID_WARNING"]);
@@ -974,7 +1024,8 @@ function STAYFOCUSEDEVENTS:VIGNETTE_ADDED(...)
     end;
 end;
 
---- Confirm summon
+--- FUNC-015 :
+-- Confirm summon
 function STAYFOCUSEDEVENTS:CONFIRM_SUMMON(...)
     if not UnitAffectingCombat("player") then
         ConfirmSummon();
@@ -982,7 +1033,8 @@ function STAYFOCUSEDEVENTS:CONFIRM_SUMMON(...)
     end;
 end;
 
---- Spell interrupt announcer
+--- FUNC-016 :
+-- Announce spell interruption when player in party or raid
 function STAYFOCUSEDEVENTS:COMBAT_LOG_EVENT_UNFILTERED(...)
     _, action, _, _, sourceName, _, _, _, _, _, _, _, _, _, spell, _, _, _, _, _, _, _, _ = ...
     if GetLocale() == "frFR" then
