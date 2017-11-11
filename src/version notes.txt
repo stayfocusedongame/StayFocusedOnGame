@@ -1,4 +1,9 @@
 ---
+--- Fixed by stayfocusedongame.
+--- DateTime: 2017/11/11 23:00
+---
+FUNC-014 : rare and treasures detection fixed
+---
 --- Created by stayfocusedongame.
 --- DateTime: 2017/11/11 11:00
 ---

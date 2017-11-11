@@ -1,6 +1,6 @@
 ---
 --- Created by stayfocusedongame.
---- DateTime: 2017/11/11 11:00
+--- DateTime: 2017/11/11 23:00
 ---
 STAYFOCUSED, STAYFOCUSEDEVENTS = CreateFrame("FRAME", "STAYFOCUSED"), {};
 LibItemLevel = LibStub:GetLibrary("LibItemLevel.7000");
@@ -1015,7 +1015,7 @@ function STAYFOCUSEDEVENTS:VIGNETTE_ADDED(...)
     end;
     vignetteID = select(1, ...);
     if vignetteID then
-        _, _, name, _ = C_Vignettes.GetVignetteInfoFromInstanceID(rareID);
+        _, _, name, _ = C_Vignettes.GetVignetteInfoFromInstanceID(vignetteID);
         if name ~= nil and name ~= isGarrisonCache then
             message = "|cff00ff00" .. name .. " " .. isDetected .. "!|r";
             RaidNotice_AddMessage(RaidWarningFrame, message, ChatTypeInfo["RAID_WARNING"]);
