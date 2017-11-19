@@ -5,12 +5,10 @@
 STAYFOCUSED, STAYFOCUSEDEVENTS = CreateFrame("FRAME", "STAYFOCUSED"), {};
 LibItemLevel = LibStub:GetLibrary("LibItemLevel.7000");
 token = "";
-
 --- TECH-001 :
 -- Create hidden frame attached to UIParent for secure hiding ui elements
 STAYFOCUSED_HIDE = CreateFrame("FRAME", "STAYFOCUSED_HIDE", UIParent);
 STAYFOCUSED_HIDE:Hide();
-
 --- TECH-002 :
 -- Add a centralized moving function with frame, parent, point, relative to, relative point, x offset, y offset and scale options
 function MoveElement(frame, parent, point, relativeto, relativepoint, xoffset, yoffset, scale)
@@ -23,7 +21,6 @@ function MoveElement(frame, parent, point, relativeto, relativepoint, xoffset, y
         frame:SetScale(scale);
     end;
 end;
-
 --- MOD-UI-001 :
 -- Move FPS frame on bottom left corner
 -- Associated with SLASH-CMD-004
@@ -33,7 +30,6 @@ FramerateLabel:Hide();
 FramerateText:ClearAllPoints();
 FramerateText:SetPoint("LEFT", FramerateLabel, "RIGHT");
 FramerateText:Hide();
-
 --- TECH-003 :
 -- Create a screen grid frame with colored lines to align ui elements
 -- Associated with SLASH-CMD-005 and SLASH-CMD-006
@@ -57,7 +53,6 @@ for i = 0, 64 do
     vertical:SetPoint("TOPLEFT", STAYFOCUSED_GRID, "TOPLEFT", 0, -i * line + 1);
     vertical:SetPoint("BOTTOMRIGHT", STAYFOCUSED_GRID, "TOPRIGHT", 0, -i * line - 1);
 end;
-
 --- TECH-004 :
 -- Set game variables to show LUA warnings and LUA errors
 -- Print variables status in chat
@@ -67,7 +62,6 @@ function LuaDebugOn()
     SetCVar("scriptWarnings", 1);
     print("scriptErrors enabled");
 end;
-
 --- TECH-005 :
 -- Set game variables to hide LUA warnings and LUA errors
 -- Print variables status in chat
@@ -77,7 +71,6 @@ function LuaDebugOff()
     SetCVar("scriptWarnings", 0);
     print("scriptErrors disabled");
 end;
-
 --- FUNC-001 :
 -- Perform ready check when in raid or group, if player is not leader or assistant, print help message in chat
 -- Associated with SLASH-CMD-007
@@ -93,7 +86,6 @@ function AskIfReady()
         print(isNotRaidLeaderOrAssist);
     end;
 end;
-
 --- FUNC-002 :
 -- Perform 10 sec boss pull countdown
 -- Send raid chat message - or self whisper - at beginning, at pre potion (1 sec) and at pulling
@@ -147,7 +139,6 @@ function PullOnChat(time)
         end;
     end);
 end;
-
 --- SLASH-CMD-001 :
 -- Add in game slash command (/sf rl) to reload ui
 --- SLASH-CMD-002 :
@@ -218,7 +209,6 @@ SlashCmdList.SF = function(option)
         print("/sf dpsmode = raid frames for damaging");
     end;
 end;
-
 --- TECH-006 :
 -- Add a centralized function witch send as a raid warning with message, sender, canal, sound options
 -- Associated with FUNC-005
@@ -229,7 +219,6 @@ function SendAs(message, sender, canal, sound)
         PlaySoundFile(sound, "Master");
     end;
 end;
-
 --- TECH-007 :
 -- Set game variables (raid frames, advanced combat logging, floating combat text, sound, camera, threat, screenshot ...)
 SetCVar("ActionButtonUseKeyDown", 1);
@@ -319,18 +308,6 @@ SetCVar("nameplateOtherAtBase", 0);
 SetCVar("nameplateOtherBottomInset", -1);
 SetCVar("nameplateOthertopInset", -1);
 SetCVar("profanityFilter", 0);
-SetCVar("raidFramesDisplayAggroHighlight", 1);
-SetCVar("raidFramesDisplayClassColor", 1);
-SetCVar("raidFramesDisplayOnlyDispellableDebuffs", 0);
-SetCVar("raidFramesDisplayPowerBars", 1);
-SetCVar("raidFramesHealthText", "percent");
-SetCVar("raidOptionDisplayMainTankAndAssist", 1);
-SetCVar("raidOptionDisplayPets", 0);
-SetCVar("raidOptionIsShown", 1);
-SetCVar("raidOptionKeepGroupsTogether", 1);
-SetCVar("raidOptionLocked", 1);
-SetCVar("raidOptionShowBorders", 0);
-SetCVar("raidOptionSortMode", "groups");
 SetCVar("rotateMinimap", 1);
 SetCVar("screenshotFormat", "jpg");
 SetCVar("screenshotQuality", 10);
@@ -358,7 +335,6 @@ SetCVar("violenceLevel", 5);
 SetCVar("whisperMode", "popout_and_inline");
 SetCVar("worldPreloadNonCritical", 0);
 SetCVar("xpBarText", 1);
-
 --- FUNC-003 :
 -- Enable mousewheel zoom on minimap
 Minimap:EnableMouseWheel(true);
@@ -369,7 +345,6 @@ Minimap:SetScript('OnMouseWheel', function(self, delta)
         Minimap_ZoomOut();
     end;
 end);
-
 --- MOD-UI-002 :
 -- Merge minimap's calendar button and minimap's tracking button
 MiniMapTracking:ClearAllPoints();
@@ -379,11 +354,9 @@ MiniMapTrackingButton:SetScript("OnMouseDown", function(self, btn)
         GameTimeFrame:Click();
     end;
 end);
-
 --- MOD-UI-003 :
 -- Adjust hall and garrison scales
 GarrisonLandingPageMinimapButton:SetScale(0.65);
-
 --- MOD-UI-004 :
 -- Hide UIErrorFrame, unwanted bar elements and unwanted minimap elements
 for _, f in next, { UIErrorsFrame, PossessBackground1, PossessBackground2, SlidingActionBarTexture0, SlidingActionBarTexture1, StanceBarLeft, StanceBarMiddle, StanceBarRight, ActionButton1NormalTexture, MultiBarBottomLeftButton1NormalTexture, MultiBarBottomLeftButton1FloatingBG,
@@ -406,7 +379,6 @@ for _, f in next, { UIErrorsFrame, PossessBackground1, PossessBackground2, Slidi
     f:SetAlpha(0);
     f:Hide();
 end;
-
 --- MOD-UI-005 :
 -- Move objective tracker on upper left corner
 -- Set objective tracker max height at 75% screen
@@ -417,7 +389,6 @@ hooksecurefunc(ObjectiveTrackerFrame, "SetPoint", function(self, anchorpoint, re
     setpos(self, "TOPLEFT", 30, -10);
     self:SetHeight(GetScreenHeight() * .75);
 end);
-
 --- MOD-UI-006 :
 -- Clean chat frame
 for i = 1, NUM_CHAT_WINDOWS do
@@ -438,7 +409,6 @@ for _, value in ipairs(CHAT_FRAME_TEXTURES) do
         end;
     end;
 end;
-
 --- MOD-UI-007 :
 -- Move chat frame to lower left corner
 ChatFrame1:ClearAllPoints();
@@ -448,7 +418,6 @@ end;
 ChatFrame1.SetPoint = function()
 end;
 ChatFrame1:SetUserPlaced(true);
-
 --- MOD-UI-008 :
 -- Move player, target and focus frames on right side closer to center
 MoveElement(PlayerFrame, nil, "CENTER", UIParent, "CENTER", 200, -110, nil);
@@ -463,7 +432,6 @@ MoveElement(FocusFrame, nil, "CENTER", UIParent, "CENTER", 363, 80, nil);
 FocusFrame:SetUserPlaced(true);
 FocusFrame.SetPoint = function()
 end;
-
 --- MOD-UI-009 :
 -- Move, adjust scales and clean cast bars (player, target and focus)
 CastingBarFrame:HookScript("OnShow", function(self)
@@ -514,7 +482,6 @@ FocusFrameSpellBar:HookScript("OnShow", function(self)
     self.Text:SetPoint("CENTER", 0, 0);
     self.Text:SetFont("Fonts\\FRIZQT__.TTF", 11, "OUTLINE");
 end);
-
 --- MOD-UI-010 :
 -- Replace portraits by class icons (player, target and focus)
 hooksecurefunc("UnitFramePortrait_Update", function(self)
@@ -530,7 +497,6 @@ hooksecurefunc("UnitFramePortrait_Update", function(self)
         end;
     end;
 end);
-
 --- MOD-UI-011 :
 -- Colorize unit frames background with class color (player, focus and target)
 local colornamebg = CreateFrame("FRAME");
@@ -561,7 +527,6 @@ colornamebg:SetScript("OnEvent", eventHandler);
 for _, BarTextures in pairs({ TargetFrameNameBackground, FocusFrameNameBackground }) do
     BarTextures:SetTexture("Interface\\TargetingFrame\\UI-StatusBar");
 end;
-
 --- MOD-UI-012 :
 -- Colorize unit frames health bar with class color (player, target and focus)
 local function colour(statusbar, unit)
@@ -579,7 +544,6 @@ hooksecurefunc("UnitFrameHealthBar_Update", colour)
 hooksecurefunc("HealthBar_OnValueChanged", function(self)
     colour(self, self.unit);
 end);
-
 --- MOD-UI-013 :
 -- Hide player and pet hit indicator
 PlayerHitIndicator:SetText(nil);
@@ -588,7 +552,6 @@ end;
 PetHitIndicator:SetText(nil);
 PetHitIndicator.SetText = function()
 end;
-
 --- MOD-UI-014 :
 -- Hide target buff and debuff
 hooksecurefunc("TargetFrame_UpdateAuraPositions", function(self)
@@ -611,7 +574,6 @@ for i = 1, 40 do
         buff:Hide();
     end;
 end;
-
 --- MOD-UI-015 :
 -- Move boss frames on left side closer to center
 MoveElement(Boss1TargetFrame, nil, "CENTER", UIParent, "CENTER", -200, -100, 1.1);
@@ -620,7 +582,6 @@ end;
 for i = 2, 5 do
     MoveElement(_G["Boss" .. i .. "TargetFrame"], nil, "RIGHT", _G["Boss" .. (i - 1) .. "TargetFrame"], "BOTTOM", _G["Boss" .. i .. "TargetFrame"]:GetHeight(), _G["Boss" .. i .. "TargetFrame"]:GetHeight() + 50, 1.1);
 end;
-
 --- MOD-UI-016 :
 -- Move arena enemies frames on left side closer to center
 -- use this script to show frames outside of arena
@@ -640,11 +601,9 @@ if LoadAddOn("Blizzard_ArenaUI") then
     ArenaEnemyFrame3.SetPoint = function()
     end;
 end;
-
 --- MOD-UI-017 :
 -- Hide boss banner
 BossBanner:UnregisterAllEvents();
-
 --- MOD-UI-018 :
 -- Hide talking head
 if LoadAddOn("Blizzard_TalkingHeadUI") then
@@ -652,7 +611,6 @@ if LoadAddOn("Blizzard_TalkingHeadUI") then
     TalkingHeadFrame:SetScript("OnHide", nil);
     TalkingHeadFrame:UnregisterAllEvents();
 end;
-
 --- MOD-UI-019 :
 -- Colorize action bar, units, minimap with faction color (horde, alliance and neutral)
 -- Replace end caps with customized ones (horde, alliance and neutral)
@@ -693,7 +651,6 @@ function STAYFOCUSEDEVENTS:ADDON_LOADED(...)
         v:SetVertexColor(red, green, blue);
     end;
 end;
-
 --- FUNC-004 :
 -- Accept quests
 -- Complete quests
@@ -773,7 +730,6 @@ function STAYFOCUSEDEVENTS:QUEST_PROGRESS(...)
         end;
     end;
 end;
-
 --- FUNC-005 :
 -- Send chat messages in raid warning with specific sound (guild, guild officer, instance, instance leader, party, party leader, raid, raid leader, whisper and battle net)
 -- Associated with TECH-006
@@ -813,7 +769,6 @@ end;
 function STAYFOCUSEDEVENTS:CHAT_MSG_WHISPER(...)
     SendAs(select(1, ...), select(5, ...), "WHISPER", "Interface\\AddOns\\StayFocusedUI\\Sounds\\chat_w.ogg");
 end;
-
 --- MOD-UI-020 :
 -- Show paper doll item level
 function ShowPaperDollItemLevel(self, unit)
@@ -850,7 +805,6 @@ end;
 hooksecurefunc("PaperDollItemSlotButton_Update", function(self)
     ShowPaperDollItemLevel(self, "player");
 end);
-
 --- MOD-UI-021 :
 -- Show weapons and armors item level in bags
 -- Colorize item level when greater than 90% of equipped item level
@@ -892,7 +846,6 @@ hooksecurefunc("ContainerFrame_Update", function(self)
         SetContainerItemLevel(button, GetContainerItemLink(self:GetID(), button:GetID()));
     end;
 end);
-
 --- MOD-UI-022 :
 -- Collapse objectives in pvp
 function STAYFOCUSEDEVENTS:PLAYER_ENTERING_WORLD(...)
@@ -900,28 +853,24 @@ function STAYFOCUSEDEVENTS:PLAYER_ENTERING_WORLD(...)
         ObjectiveTracker_Collapse();
     end;
 end;
-
 --- FUNC-006 :
 -- Confirm disenchant roll
 function STAYFOCUSEDEVENTS:CONFIRM_DISENCHANT_ROLL(...)
     ConfirmLootRoll(select(1, ...), select(2, ...));
     StaticPopup_Hide("CONFIRM_LOOT_ROLL");
 end;
-
 --- FUNC-007 :
 -- Confirm loot roll
 function STAYFOCUSEDEVENTS:CONFIRM_LOOT_ROLL(...)
     ConfirmLootRoll(select(1, ...), select(2, ...));
     StaticPopup_Hide("CONFIRM_LOOT_ROLL");
 end;
-
 --- FUNC-008 :
 -- Confirm bind on pickup loot
 function STAYFOCUSEDEVENTS:LOOT_BIND_CONFIRM(...)
     ConfirmLootSlot(select(1, ...), select(2, ...));
     StaticPopup_Hide("LOOT_BIND");
 end;
-
 --- FUNC-009 :
 -- Speed up looting
 function STAYFOCUSEDEVENTS:LOOT_READY(...)
@@ -936,7 +885,6 @@ function STAYFOCUSEDEVENTS:LOOT_READY(...)
         end;
     end;
 end;
-
 --- FUNC-010 :
 -- Open mails except GM's mails and ones with cash on delivery
 function STAYFOCUSEDEVENTS:MAIL_INBOX_UPDATE(...)
@@ -950,7 +898,6 @@ function STAYFOCUSEDEVENTS:MAIL_INBOX_UPDATE(...)
         end;
     end;
 end;
-
 --- FUNC-011 :
 -- Repair equipment and sell junk when visiting a merchant
 -- Stop selling when merchant window is closed
@@ -978,7 +925,6 @@ function STAYFOCUSEDEVENTS:MERCHANT_CLOSED(...)
         token:Cancel();
     end;
 end;
-
 --- FUNC-012 :
 -- Learn available recipes when visiting a trainer
 -- Stop learning when trainer window is closed
@@ -997,7 +943,6 @@ function STAYFOCUSEDEVENTS:TRAINER_CLOSED(...)
         token:Cancel();
     end;
 end;
-
 --- FUNC-013 :
 -- Release corpse in pvp
 function STAYFOCUSEDEVENTS:PLAYER_DEAD(...)
@@ -1006,7 +951,6 @@ function STAYFOCUSEDEVENTS:PLAYER_DEAD(...)
         RepopMe();
     end;
 end;
-
 --- FUNC-014 :
 -- Announce minimap : rares, treasures except garrison cache (raid waning and sound)
 function STAYFOCUSEDEVENTS:VIGNETTE_ADDED(...)
@@ -1027,7 +971,6 @@ function STAYFOCUSEDEVENTS:VIGNETTE_ADDED(...)
         end;
     end;
 end;
-
 --- FUNC-015 :
 -- Confirm summon
 function STAYFOCUSEDEVENTS:CONFIRM_SUMMON(...)
@@ -1036,7 +979,6 @@ function STAYFOCUSEDEVENTS:CONFIRM_SUMMON(...)
         StaticPopup_Hide("CONFIRM_SUMMON");
     end;
 end;
-
 --- FUNC-016 :
 -- Announce spell interruption when player in party or raid
 function STAYFOCUSEDEVENTS:COMBAT_LOG_EVENT_UNFILTERED(...)
@@ -1054,10 +996,421 @@ function STAYFOCUSEDEVENTS:COMBAT_LOG_EVENT_UNFILTERED(...)
         end;
     end;
 end;
-
+--- FUNC-017 :
+-- Enable double click fishing with or without fishing pole equipped
+local ArcheologyKnown = GetSpellInfo(80451);
+local FishingKnown = GetSpellInfo(131474);
+local stopCastingTimer, stopCasting, isCasting;
+local isFishing, isSurveying;
+local authorizedClickZones = {
+    [WorldFrame] = true,
+    [UIParent] = true,
+};
+local STAYFOCUSED_FISHING = CreateFrame("Button", "STAYFOCUSED_FISHING", UIParent, "SecureActionButtonTemplate");
+STAYFOCUSED_FISHING:SetScript("OnEvent", function(self, event, ...)
+    return self[event] and self[event](self, ...);
+end);
+STAYFOCUSED_FISHING:RegisterEvent("PLAYER_LOGIN");
+STAYFOCUSED_FISHING:EnableMouse(true);
+STAYFOCUSED_FISHING:RegisterForClicks("RightButtonUp");
+STAYFOCUSED_FISHING:SetPoint("LEFT", UIParent, "RIGHT", 10000, 0);
+STAYFOCUSED_FISHING:Hide();
+STAYFOCUSED_FISHING:SetAttribute("action", nil);
+STAYFOCUSED_FISHING:SetAttribute("type", "spell");
+STAYFOCUSED_FISHING:SetAttribute("spell", FishingKnown);
+STAYFOCUSED_FISHING:SetScript("PostClick", function(self, button, down)
+    if InCombatLockdown() then
+        stopCasting = true;
+    elseif isCasting then
+        ClearOverrideBindings(self);
+        isCasting = nil;
+    end;
+end);
+function STAYFOCUSED_FISHING:SetupClickHook()
+    local lastClickTime = 0;
+    WorldFrame:HookScript("OnMouseDown", function(self, button, down)
+        if not isFishing or button ~= "RightButton" or InCombatLockdown() or CanScanResearchSite() then
+            return
+        end;
+        local clickTime = GetTime();
+        local clickDiff = clickTime - lastClickTime;
+        lastClickTime = clickTime;
+        if clickDiff > 0.05 and clickDiff < 0.25 then
+            if IsMouselooking() then
+                MouselookStop();
+            end;
+            SetOverrideBindingClick(STAYFOCUSED_FISHING, true, "BUTTON2", "STAYFOCUSED_FISHING");
+            isCasting = true;
+        end;
+    end);
+    self.SetupClickHook = nil;
+end;
+function STAYFOCUSED_FISHING:EnableDoubleClickFishing()
+    if isFishing then
+        return
+    end;
+    if not GetSpellInfo(FishingKnown) then
+        return
+    end;
+    if self.SetupClickHook then
+        self:SetupClickHook();
+        self:RegisterEvent("PLAYER_LOGOUT");
+    end;
+    isFishing = true;
+end;
+function STAYFOCUSED_FISHING:DisableDoubleClickFishing()
+    if not isFishing then
+        return
+    end;
+    isFishing = nil;
+    stopCastingTimer = nil;
+end;
+function STAYFOCUSED_FISHING:PLAYER_LOGIN()
+    self:UnregisterEvent("PLAYER_LOGIN");
+    self:RegisterEvent("PLAYER_LOGOUT");
+    self:RegisterEvent("PLAYER_REGEN_DISABLED");
+    self:RegisterEvent("PLAYER_REGEN_ENABLED");
+    self:RegisterUnitEvent("UNIT_SPELLCAST_CHANNEL_START", "player");
+    self:RegisterUnitEvent("UNIT_SPELLCAST_CHANNEL_STOP", "player");
+end;
+function STAYFOCUSED_FISHING:PLAYER_LOGOUT()
+    self:DisableDoubleClickFishing();
+end
+function STAYFOCUSED_FISHING:PLAYER_REGEN_DISABLED()
+    self:UnregisterEvent("UNIT_SPELLCAST_CHANNEL_START");
+    self:UnregisterEvent("UNIT_SPELLCAST_CHANNEL_STOP");
+    if UnitChannelInfo("unit") == FishingKnown then
+        self:UNIT_SPELLCAST_CHANNEL_STOP("player", FishingKnown);
+    end;
+    if isFishing then
+        self:DisableDoubleClickFishing();
+    end;
+end;
+function STAYFOCUSED_FISHING:PLAYER_REGEN_ENABLED()
+    if stopCasting then
+        ClearOverrideBindings(self);
+        stopCasting = nil;
+        isCasting = nil;
+    end;
+    self:RegisterUnitEvent("UNIT_SPELLCAST_CHANNEL_START", "player");
+    self:RegisterUnitEvent("UNIT_SPELLCAST_CHANNEL_STOP", "player");
+    self:EnableDoubleClickFishing();
+end;
+function STAYFOCUSED_FISHING:UNIT_SPELLCAST_CHANNEL_START(unit, spell)
+    if spell == FishingKnown then
+        if stopCastingTimer then
+            stopCastingTimer = GetTime() + 1000000;
+        end;
+    end;
+end;
+function STAYFOCUSED_FISHING:UNIT_SPELLCAST_CHANNEL_STOP(unit, spell)
+    if spell == FishingKnown then
+        if stopCastingTimer then
+            stopCastingTimer = GetTime() + 10000;
+        end;
+    end;
+end;
+local STAYFOCUSED_FISHINGTIMERFRAME = CreateFrame("Frame");
+local STAYFOCUSED_FISHINGTIMER = STAYFOCUSED_FISHINGTIMERFRAME:CreateAnimationGroup();
+local timer = STAYFOCUSED_FISHINGTIMER:CreateAnimation();
+timer:SetDuration(1);
+STAYFOCUSED_FISHINGTIMER:SetScript("OnFinished", function(self, requested)
+    if not isFishing or not stopCastingTimer then
+        return
+    end;
+    if GetTime() > stopCastingTimer then
+        STAYFOCUSED_FISHING:DisableDoubleClickFishing();
+        stopCastingTimer = nil;
+    else
+        self:Play();
+    end;
+end);
+GameTooltip:HookScript("OnShow", function(self)
+    if isFishing or not authorizedClickZones[self:GetOwner()] then
+        return
+    end;
+    STAYFOCUSED_FISHING:EnableDoubleClickFishing();
+    if not isFishing then
+        STAYFOCUSED_FISHING:EnableDoubleClickFishing();
+    end;
+    stopCastingTimer = GetTime() + 10000;
+    STAYFOCUSED_FISHINGTIMER:Play();
+end);
+--- FUNC-018 :
+-- Enable double click survey
+local STAYFOCUSED_SURVEYING = CreateFrame("Button", "STAYFOCUSED_SURVEYING", UIParent, "SecureActionButtonTemplate");
+STAYFOCUSED_SURVEYING:SetScript("OnEvent", function(self, event, ...)
+    return self[event] and self[event](self, ...);
+end)
+STAYFOCUSED_SURVEYING:RegisterEvent("PLAYER_LOGIN");
+STAYFOCUSED_SURVEYING:EnableMouse(true);
+STAYFOCUSED_SURVEYING:RegisterForClicks("RightButtonUp");
+STAYFOCUSED_SURVEYING:SetPoint("LEFT", UIParent, "RIGHT", 10000, 0);
+STAYFOCUSED_SURVEYING:Hide();
+STAYFOCUSED_SURVEYING:SetAttribute("action", nil);
+STAYFOCUSED_SURVEYING:SetAttribute("type", "spell");
+STAYFOCUSED_SURVEYING:SetAttribute("spell", ArcheologyKnown);
+STAYFOCUSED_SURVEYING:SetScript("PostClick", function(self, button, down)
+    if InCombatLockdown() then
+        stopCasting = true;
+    elseif isCasting then
+        ClearOverrideBindings(self);
+        isCasting = nil;
+    end;
+end);
+function STAYFOCUSED_SURVEYING:SetupClickHook()
+    local lastClickTime = 0;
+    WorldFrame:HookScript("OnMouseDown", function(self, button, down)
+        if not isSurveying or button ~= "RightButton" or InCombatLockdown() or not CanScanResearchSite() or not GetSpellCooldown(80451) == 0 then
+            return
+        end;
+        local clickTime = GetTime();
+        local clickDiff = clickTime - lastClickTime;
+        lastClickTime = clickTime;
+        if clickDiff > 0.05 and clickDiff < 0.25 then
+            if IsMouselooking() then
+                MouselookStop();
+            end;
+            SetOverrideBindingClick(STAYFOCUSED_SURVEYING, true, "BUTTON2", "STAYFOCUSED_SURVEYING");
+            isCasting = true;
+        end;
+    end);
+    self.SetupClickHook = nil;
+end;
+function STAYFOCUSED_SURVEYING:EnableDoubleClickSurvey()
+    if isSurveying then
+        return
+    end;
+    if not GetSpellInfo(ArcheologyKnown) then
+        return
+    end;
+    if self.SetupClickHook then
+        self:SetupClickHook();
+        self:RegisterEvent("PLAYER_LOGOUT");
+    end;
+    isSurveying = true;
+end;
+function STAYFOCUSED_SURVEYING:DisableDoubleClickSurvey()
+    if not isSurveying then
+        return
+    end;
+    isSurveying = nil;
+    stopCastingTimer = nil;
+end;
+function STAYFOCUSED_SURVEYING:PLAYER_LOGIN()
+    self:UnregisterEvent("PLAYER_LOGIN");
+    self:RegisterEvent("PLAYER_LOGOUT");
+    self:RegisterEvent("PLAYER_REGEN_DISABLED");
+    self:RegisterEvent("PLAYER_REGEN_ENABLED");
+    self:RegisterUnitEvent("UNIT_SPELLCAST_CHANNEL_START", "player");
+    self:RegisterUnitEvent("UNIT_SPELLCAST_CHANNEL_STOP", "player");
+end;
+function STAYFOCUSED_SURVEYING:PLAYER_LOGOUT()
+    self:DisableDoubleClickSurvey();
+end;
+function STAYFOCUSED_SURVEYING:PLAYER_REGEN_DISABLED()
+    self:UnregisterEvent("UNIT_SPELLCAST_CHANNEL_START");
+    self:UnregisterEvent("UNIT_SPELLCAST_CHANNEL_STOP");
+    if UnitChannelInfo("unit") == ArcheologyKnown then
+        self:UNIT_SPELLCAST_CHANNEL_STOP("player", ArcheologyKnown);
+    end;
+    if isSurveying then
+        self:DisableDoubleClickSurvey();
+    end;
+end;
+function STAYFOCUSED_SURVEYING:PLAYER_REGEN_ENABLED()
+    if stopCasting then
+        ClearOverrideBindings(self);
+        stopCasting = nil;
+        isCasting = nil;
+    end;
+    self:RegisterUnitEvent("UNIT_SPELLCAST_CHANNEL_START", "player");
+    self:RegisterUnitEvent("UNIT_SPELLCAST_CHANNEL_STOP", "player");
+    self:EnableDoubleClickSurvey();
+end;
+function STAYFOCUSED_SURVEYING:UNIT_SPELLCAST_CHANNEL_START(unit, spell)
+    if spell == ArcheologyKnown then
+        if stopCastingTimer then
+            stopCastingTimer = GetTime() + 1000000;
+        end;
+    end;
+end;
+function STAYFOCUSED_SURVEYING:UNIT_SPELLCAST_CHANNEL_STOP(unit, spell)
+    if spell == ArcheologyKnown then
+        if stopCastingTimer then
+            stopCastingTimer = GetTime() + 10000;
+        end;
+    end;
+end;
+local STAYFOCUSED_SURVEYINGTIMERFRAME = CreateFrame("Frame");
+local STAYFOCUSED_SURVEYINGTIMER = STAYFOCUSED_SURVEYINGTIMERFRAME:CreateAnimationGroup();
+local timer = STAYFOCUSED_SURVEYINGTIMER:CreateAnimation();
+timer:SetDuration(1);
+STAYFOCUSED_FISHINGTIMER:SetScript("OnFinished", function(self, requested)
+    if not isFishing or not stopCastingTimer then
+        return
+    end;
+    if GetTime() > stopCastingTimer then
+        STAYFOCUSED_FISHING:DisableDoubleClickFishing();
+        stopCastingTimer = nil;
+    else
+        self:Play();
+    end;
+end);
+GameTooltip:HookScript("OnShow", function(self)
+    if isSurveying or not authorizedClickZones[self:GetOwner()] then
+        return
+    end;
+    STAYFOCUSED_SURVEYING:EnableDoubleClickSurvey();
+    if not isSurveying then
+        STAYFOCUSED_SURVEYING:EnableDoubleClickSurvey();
+    end;
+    stopCastingTimer = GetTime() + 10000;
+    STAYFOCUSED_SURVEYINGTIMER:Play();
+end);
+--- FUNC-019 :
+-- Colorize PvE nameplates by threat for all roles (green : threat status corresponding to your role, red not corresponding, orange for status warning, blue for offtank) and resize nameplates while tanking
+local offTanks = {};
+local function resetFrame(frame)
+    if frame.threat then
+        frame.threat = nil;
+        frame.healthBar:SetStatusBarColor(frame.healthBar.r, frame.healthBar.g, frame.healthBar.b);
+    end;
+end;
+local function updateHealthColor(frame, ...)
+    if frame.threat then
+        local forceUpdate = ...;
+        local previousColor = frame.threat.previousColor;
+        if forceUpdate or previousColor.r ~= frame.healthBar.r or previousColor.g ~= frame.healthBar.g or previousColor.b ~= frame.healthBar.b then
+            frame.healthBar:SetStatusBarColor(frame.threat.color.r, frame.threat.color.g, frame.threat.color.b);
+            frame.threat.previousColor.r = frame.healthBar.r;
+            frame.threat.previousColor.g = frame.healthBar.g;
+            frame.threat.previousColor.b = frame.healthBar.b;
+        end;
+    end;
+end;
+hooksecurefunc("CompactUnitFrame_UpdateHealthColor", updateHealthColor);
+local function collectOffTanks()
+    local collectedTanks = {};
+    local unitPrefix, unit, i, unitRole;
+    local isInRaid = IsInRaid();
+    if isInRaid then
+        unitPrefix = "raid";
+    else
+        unitPrefix = "party";
+    end;
+    for i = 1, GetNumGroupMembers() do
+        unit = unitPrefix .. i;
+        if not UnitIsUnit(unit, "player") then
+            unitRole = UnitGroupRolesAssigned(unit);
+            if unitRole == "TANK" then
+                table.insert(collectedTanks, unit);
+            elseif isInRaid and unitRole == "NONE" then
+                local _, _, _, _, _, _, _, _, _, raidRole = GetRaidRosterInfo(i);
+                if raidRole == "MAINTANK" then
+                    table.insert(collectedTanks, unit);
+                end;
+            end;
+        end;
+    end;
+    return collectedTanks;
+end;
+local function isOfftankTanking(mobUnit)
+    local unit, situation;
+    for _, unit in ipairs(offTanks) do
+        situation = UnitThreatSituation(unit, mobUnit) or -1;
+        if situation > 1 then
+            return true;
+        end;
+    end;
+    return false;
+end
+local function updateThreatColor(frame)
+    playerRole = GetSpecializationRole(GetSpecialization());
+    if playerRole == "TANK" then
+        frame.healthBar:SetHeight(12);
+    end;
+    local unit = frame.unit;
+    local reaction = UnitReaction("player", unit);
+    if reaction and reaction < 5 and (reaction < 4 or CompactUnitFrame_IsOnThreatListWithPlayer(frame.displayedUnit)) and not UnitIsPlayer(unit) and not CompactUnitFrame_IsTapDenied(frame) then
+        local threat = UnitThreatSituation("player", unit) or -1;
+        if playerRole == "TANK" and threat < 1 and isOfftankTanking(unit) then
+            threat = 4;
+        end;
+        if not frame.threat or frame.threat.lastSituation ~= threat then
+            local r, g, b;
+            if threat == 0 then
+                --  Player has less than 100% raw threat (default UI shows no indicator)
+                if playerRole == "TANK" then
+                    r, g, b = 1, 0, 0; else r, g, b = 0, 1, 0;
+                end;
+            elseif threat == 1 then
+                -- Player has 100% or higher raw threat but isn't mobUnit's primary target (default UI shows yellow indicator)
+                r, g, b = .6, .4, 0;
+            elseif threat == 2 then
+                -- Player is mobUnit's primary target, and another unit has 100% or higher raw threat (default UI shows orange indicator)
+                if playerRole == "TANK" then
+                    r, g, b = 1, 0, 0; else r, g, b = 0, 1, 0;
+                end;
+            elseif threat == 3 then
+                -- Player is mobUnit's primary target, and no other unit has 100% or higher raw threat (default UI shows red indicator)
+                if playerRole == "TANK" then
+                    r, g, b = 0, 1, 0; else r, g, b = 1, 0, 0;
+                end;
+            elseif threat == 4 then
+                -- offtank is tanking
+                if playerRole == "TANK" then
+                    r, g, b = 0, 0, 1; else r, g, b = 0, 1, 0;
+                end;
+            end
+            if not frame.threat then
+                frame.threat = {
+                    ["color"] = {},
+                    ["previousColor"] = {},
+                };
+            end;
+            frame.threat.lastSituation = threat;
+            frame.threat.color.r = r;
+            frame.threat.color.g = g;
+            frame.threat.color.b = b;
+            updateHealthColor(frame, true);
+        end;
+    else
+        resetFrame(frame);
+    end;
+end;
+local STAYFOCUSED_THREATPLATES = CreateFrame("frame")
+STAYFOCUSED_THREATPLATES:RegisterEvent("UNIT_THREAT_SITUATION_UPDATE");
+STAYFOCUSED_THREATPLATES:RegisterEvent("NAME_PLATE_UNIT_ADDED");
+STAYFOCUSED_THREATPLATES:RegisterEvent("NAME_PLATE_UNIT_REMOVED");
+STAYFOCUSED_THREATPLATES:RegisterEvent("PLAYER_ROLES_ASSIGNED");
+STAYFOCUSED_THREATPLATES:RegisterEvent("RAID_ROSTER_UPDATE");
+STAYFOCUSED_THREATPLATES:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED");
+STAYFOCUSED_THREATPLATES:SetScript("OnEvent", function(self, event, arg1)
+    if event == "UNIT_THREAT_SITUATION_UPDATE" or event == "PLAYER_SPECIALIZATION_CHANGED" then
+        for _, nameplate in pairs(C_NamePlate.GetNamePlates()) do
+            updateThreatColor(nameplate.UnitFrame);
+        end;
+    elseif event == "NAME_PLATE_UNIT_ADDED" then
+        local unitId = arg1;
+        local callback = function()
+            local plate = C_NamePlate.GetNamePlateForUnit(unitId);
+            if plate then
+                updateThreatColor(plate.UnitFrame);
+            end;
+        end;
+        callback();
+        C_Timer.NewTimer(0.3, callback);
+    elseif event == "NAME_PLATE_UNIT_REMOVED" then
+        local nameplate = C_NamePlate.GetNamePlateForUnit(arg1);
+        resetFrame(nameplate.UnitFrame);
+    elseif event == "PLAYER_ROLES_ASSIGNED" or event == "RAID_ROSTER_UPDATE" then
+        offTanks = collectOffTanks();
+    end;
+end);
 --- Handler
 STAYFOCUSED:SetScript("OnEvent", function(self, event, ...)
-    STAYFOCUSEDEVENTS[event](self, ...)
+    STAYFOCUSEDEVENTS[event](self, ...);
 end);
 for k, _ in pairs(STAYFOCUSEDEVENTS) do
     STAYFOCUSED:RegisterEvent(k);

@@ -1,5 +1,12 @@
 ---
 --- Created by stayfocusedongame.
+--- DateTime: 2017/11/19 18:00
+---
+TECH-007 : Raid CVars deleted, they do not override blizzards profils
+FUNC-019 : Colorize PvE nameplates by threat for all roles (green : threat status corresponding to your role, red not corresponding, orange for status warning, blue for offtank) and resize nameplates while tanking
+Reformat code and merge files.
+---
+--- Created by stayfocusedongame.
 --- DateTime: 2017/11/19 15:00
 ---
 FUNC-017 : Enable double click fishing with or without fishing pole equipped

@@ -4,5 +4,4 @@
     <Script file="Libs\LibStub.lua"/>
     <Script file="Libs\LibItemLevel.lua"/>
     <Script file="StayFocusedUI.lua"/>
-    <Script file="StayFocusedEasyJobs.lua"/>
 </Ui>
