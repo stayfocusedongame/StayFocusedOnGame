@@ -2,7 +2,7 @@
 ## Title: Stay Focused UI
 ## Notes: minimalistic UI replacement
 ## Author: stayfocusedongame
-## Version: 171111-00002
+## Version: 191111-00003
 ## DefaultState: Enabled
 
 StayFocusedUI.xml

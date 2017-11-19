@@ -1,4 +1,16 @@
 ---
+--- Created by stayfocusedongame.
+--- DateTime: 2017/11/19 15:00
+---
+FUNC-017 : Enable double click fishing with or without fishing pole equipped
+FUNC-018 : Enable double click survey
+---
+--- Fixed by stayfocusedongame.
+--- DateTime: 2017/11/19 15:00
+---
+MOD-UI-012 : Fixed unit frames health bar with class color
+TECH-007 : Useless CVars deleted
+---
 --- Fixed by stayfocusedongame.
 --- DateTime: 2017/11/11 23:00
 ---

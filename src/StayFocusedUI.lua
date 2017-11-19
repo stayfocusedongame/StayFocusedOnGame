@@ -1,6 +1,6 @@
 ---
 --- Created by stayfocusedongame.
---- DateTime: 2017/11/11 23:00
+--- DateTime: 2017/11/19 15:00
 ---
 STAYFOCUSED, STAYFOCUSEDEVENTS = CreateFrame("FRAME", "STAYFOCUSED"), {};
 LibItemLevel = LibStub:GetLibrary("LibItemLevel.7000");
@@ -213,6 +213,9 @@ SlashCmdList.SF = function(option)
         print("/sf rc = perform ready check");
         print("/sf pull = pull timer 10 sec");
         print("/sf stop = stop pull timer");
+        print("/sf healmode = raid frames for healing");
+        print("/sf tankmode = raid frames for tanking");
+        print("/sf dpsmode = raid frames for damaging");
     end;
 end;
 
@@ -260,12 +263,14 @@ SetCVar("advancedWatchFrame", 1);
 SetCVar("alwaysCompareItems", 1);
 SetCVar("autoDismount", 1);
 SetCVar("autoDismountFlying", 1);
-SetCVar("autoInteract", 1);
+SetCVar("autoInteract", 0);
 SetCVar("autoLootDefault", 1);
 SetCVar("autoLootRate", 0.1);
 SetCVar("cameraDistanceMaxZoomFactor", 2.6);
 SetCVar("cameraSavedDistance", 25);
 SetCVar("cameraSavedPitch", 33);
+SetCVar("cameraSmoothStyle", 0);
+SetCVar("cameraSmoothTrackingStyle", 0);
 SetCVar("chatBubbles", 1);
 SetCVar("chatBubblesParty", 0);
 SetCVar("chatStyle", "im");
@@ -273,28 +278,36 @@ SetCVar("colorChatNamesByClass", 1);
 SetCVar("countdownForCooldowns", 1);
 SetCVar("deselectOnClick", 1);
 SetCVar("displayFreeBagSlots", 1);
-SetCVar("enableFloatingCombatText", 1);
 SetCVar("findYourselfAnywhere", 0);
 SetCVar("findYourselfMode", 1);
+SetCVar("enableFloatingCombatText", 1);
+SetCVar("floatingCombatTextAllSpellMechanics", 0);
 SetCVar("floatingCombatTextAuras", 0);
 SetCVar("floatingCombatTextCombatDamage", 0);
+SetCVar("floatingCombatTextCombatDamageAllAutos", 0);
+SetCVar("floatingCombatTextCombatDamageDirectionalOffset", 0);
 SetCVar("floatingCombatTextCombatDamageDirectionalScale", 0);
-SetCVar("floatingCombatTextCombatHealing", 0);
+SetCVar("floatingCombatTextCombatHealing", 1);
 SetCVar("floatingCombatTextCombatHealingAbsorbSelf", 0);
 SetCVar("floatingCombatTextCombatHealingAbsorbTarget", 0);
 SetCVar("floatingCombatTextCombatLogPeriodicSpells", 0);
 SetCVar("floatingCombatTextCombatState", 0);
+SetCVar("floatingCombatTextComboPoints", 0);
 SetCVar("floatingCombatTextDamageReduction", 0);
 SetCVar("floatingCombatTextDodgeParryMiss", 0);
 SetCVar("floatingCombatTextEnergyGains", 0);
-SetCVar("floatingCombatTextFloatMode", "2");
-SetCVar("floatingCombatTextFriendlyHealers", 1);
+SetCVar("floatingCombatTextFloatMode", 3);-- 1 = up, 2 = down, 3 = arc
+SetCVar("floatingCombatTextFriendlyHealers", 0);
 SetCVar("floatingCombatTextHonorGains", 0);
+SetCVar("floatingCombatTextLowManaHealth", 0);
 SetCVar("floatingCombatTextPeriodicEnergyGains", 0);
 SetCVar("floatingCombatTextPetMeleeDamage", 0);
+SetCVar("floatingCombatTextPetSpellDamage", 0);
 SetCVar("floatingCombatTextReactives", 0);
-SetCVar("floatingCombatTextRepChanges", 1);
+SetCVar("floatingCombatTextReactives", 0);
+SetCVar("floatingCombatTextRepChanges", 0);
 SetCVar("floatingCombatTextSpellMechanics", 0);
+SetCVar("floatingCombatTextSpellMechanicsOther", 0);
 SetCVar("fullSizeFocusFrame", 0);
 SetCVar("gametip", 0);
 SetCVar("guildMemberNotify", 1);
@@ -308,25 +321,15 @@ SetCVar("nameplateOthertopInset", -1);
 SetCVar("profanityFilter", 0);
 SetCVar("raidFramesDisplayAggroHighlight", 1);
 SetCVar("raidFramesDisplayClassColor", 1);
-SetCVar("raidFramesDisplayClassColor", 1);
 SetCVar("raidFramesDisplayOnlyDispellableDebuffs", 0);
 SetCVar("raidFramesDisplayPowerBars", 1);
-SetCVar("raidFramesDisplayPowerBars", 1);
 SetCVar("raidFramesHealthText", "percent");
-SetCVar("raidFramesHealthText", "percent");
-SetCVar("raidFramesHeight", 72);
-SetCVar("raidFramesHeight", 72); -- 36 to 72
-SetCVar("raidFramesWidth", 72); -- 72 to 144
 SetCVar("raidOptionDisplayMainTankAndAssist", 1);
 SetCVar("raidOptionDisplayPets", 0);
 SetCVar("raidOptionIsShown", 1);
 SetCVar("raidOptionKeepGroupsTogether", 1);
-SetCVar("raidOptionKeepGroupsTogether", 1);
-SetCVar("raidOptionLocked", 1);
 SetCVar("raidOptionLocked", 1);
 SetCVar("raidOptionShowBorders", 0);
-SetCVar("raidOptionShowBorders", 0);
-SetCVar("raidOptionSortMode", "groups");
 SetCVar("raidOptionSortMode", "groups");
 SetCVar("rotateMinimap", 1);
 SetCVar("screenshotFormat", "jpg");
@@ -350,7 +353,6 @@ SetCVar("threatWarning", 3);
 SetCVar("threatWorldText", 1);
 SetCVar("toastDuration", 0);
 SetCVar("trackQuestSorting", "proximity");
-SetCVar("useCompactPartyFrames", 1);
 SetCVar("useCompactPartyFrames", 1);
 SetCVar("violenceLevel", 5);
 SetCVar("whisperMode", "popout_and_inline");
@@ -538,7 +540,7 @@ colornamebg:RegisterEvent("PLAYER_FOCUS_CHANGED");
 colornamebg:RegisterEvent("UNIT_FACTION");
 local function eventHandler(self, event, ...)
     if PlayerFrame:IsShown() and not PlayerFrame.bg then
-        c = RAID_CLASS_COLORS[select(2, UnitClass("player"))];
+        c = CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[select(2, UnitClass("player"))] or RAID_CLASS_COLORS[select(2, UnitClass("player"))];
         bg = PlayerFrame:CreateTexture();
         bg:SetPoint("TOPLEFT", PlayerFrameBackground);
         bg:SetPoint("BOTTOMRIGHT", PlayerFrameBackground, 0, 22);
@@ -547,11 +549,11 @@ local function eventHandler(self, event, ...)
         PlayerFrame.bg = true;
     end;
     if UnitIsPlayer("target") then
-        c = RAID_CLASS_COLORS[select(2, UnitClass("target"))];
+        c = CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[select(2, UnitClass("target"))] or RAID_CLASS_COLORS[select(2, UnitClass("target"))];
         TargetFrameNameBackground:SetVertexColor(c.r, c.g, c.b);
     end;
     if UnitIsPlayer("focus") then
-        c = RAID_CLASS_COLORS[select(2, UnitClass("focus"))];
+        c = CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[select(2, UnitClass("focus"))] or RAID_CLASS_COLORS[select(2, UnitClass("focus"))];
         FocusFrameNameBackground:SetVertexColor(c.r, c.g, c.b);
     end;
 end;
@@ -567,8 +569,10 @@ local function colour(statusbar, unit)
     if UnitIsPlayer(unit) and UnitIsConnected(unit) and unit == statusbar.unit and UnitClass(unit) then
         _, class = UnitClass(unit);
         c = CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[class] or RAID_CLASS_COLORS[class];
+        _, myclass = UnitClass("player");
+        p = CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[myclass] or RAID_CLASS_COLORS[myclass];
         statusbar:SetStatusBarColor(c.r, c.g, c.b);
-        PlayerFrameHealthBar:SetStatusBarColor(c.r, c.g, c.b);
+        PlayerFrameHealthBar:SetStatusBarColor(p.r, p.g, p.b);
     end;
 end;
 hooksecurefunc("UnitFrameHealthBar_Update", colour)
