@@ -1,0 +1,660 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="878438f2-67dd-4b40-b0bc-40cf72f9ac15" name="Default" comment="" />
+    <ignored path="$PROJECT_DIR$/out/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileColors">
+    <fileColor scope="Non-Project Files (Material Default)" color="2E3C43" />
+    <fileColor scope="Non-Project Files (Material Darker)" color="323232" />
+    <fileColor scope="Non-Project Files (Material Lighter)" color="eae8e8" />
+    <fileColor scope="Non-Project Files (Material Palenight)" color="2f2e43" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="StayFocusedUI.toc" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/production/StayFocusedUI/StayFocusedUI.toc">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="37" lean-forward="false" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="37" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StayFocusedUI.lua" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/StayFocusedUI.lua">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="884">
+              <caret line="1270" column="0" lean-forward="false" selection-start-line="1270" selection-start-column="0" selection-end-line="1271" selection-end-column="205" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StayFocusedUI.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/StayFocusedUI.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="5" lean-forward="true" selection-start-line="6" selection-start-column="5" selection-end-line="6" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StayFocusedUI.lua" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/production/StayFocusedUI/StayFocusedUI.lua">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="46">
+              <caret line="975" column="46" lean-forward="true" selection-start-line="975" selection-start-column="46" selection-end-line="975" selection-end-column="46" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="version notes.txt" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/version notes.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="213" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StayFocusedUI.toc" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/StayFocusedUI.toc">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="7" column="17" lean-forward="true" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="NewLua" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>]]</find>
+      <find>local</find>
+      <find>TECH-006</find>
+      <find>SLASH-CMD</find>
+      <find>coll</find>
+      <find>-016</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="SIGN_OFF_COMMIT" value="true" />
+  </component>
+  <component name="GradleLocalSettings">
+    <option name="externalProjectsViewState">
+      <projects_view />
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/archives/Interface/CVars/CVars_ActionBars.lua" />
+        <option value="$PROJECT_DIR$/archives/Interface/CVars/CVars_Controls.lua" />
+        <option value="$PROJECT_DIR$/archives/Interface/CVars/CVars_Sound.lua" />
+        <option value="$PROJECT_DIR$/archives/Interface/Bars/Clean.lua" />
+        <option value="$PROJECT_DIR$/archives/Interface/Chat/Clean.lua" />
+        <option value="$PROJECT_DIR$/archives/Interface/Chat/Chat.lua" />
+        <option value="$PROJECT_DIR$/archives/Interface/Bars_MainBar.lua" />
+        <option value="$PROJECT_DIR$/archives/Interface/Bars_MulitBarBottomLeft.lua" />
+        <option value="$PROJECT_DIR$/archives/Interface/Bars_MulitBarBottomRight.lua" />
+        <option value="$PROJECT_DIR$/archives/Interface/Bars_ZoneAbility.lua" />
+        <option value="$PROJECT_DIR$/archives/Interface/skin.lua" />
+        <option value="$PROJECT_DIR$/archives/Interface/Units/TargetAura.lua" />
+        <option value="$PROJECT_DIR$/archives/Interface/Units/Target.lua" />
+        <option value="$PROJECT_DIR$/archives/Interface/Units/Player.lua" />
+        <option value="$PROJECT_DIR$/archives/Interface/Misc/BossBanner.lua" />
+        <option value="$PROJECT_DIR$/archives/Interface/Misc/OrderHall.lua" />
+        <option value="$PROJECT_DIR$/archives/Interface/Misc/TalkingHead.lua" />
+        <option value="$PROJECT_DIR$/archives/Interface/Units/Boss.lua" />
+        <option value="$PROJECT_DIR$/archives/Interface/Units/Focus.lua" />
+        <option value="$PROJECT_DIR$/archives/Interface/Misc/ObjectiveTracker.lua" />
+        <option value="$PROJECT_DIR$/archives/Interface/Map/GarrisonButton.lua" />
+        <option value="$PROJECT_DIR$/archives/Interface/Map/Minimap.lua" />
+        <option value="$PROJECT_DIR$/production/StayFocusedUI/StayFocusedUI.xml" />
+        <option value="$PROJECT_DIR$/src/StayFocused.lua" />
+        <option value="$PROJECT_DIR$/archives/README.md" />
+        <option value="$PROJECT_DIR$/src/StayFocusedOptions.lua" />
+        <option value="$PROJECT_DIR$/production/StayFocusedUI/StayFocusedUI.toc" />
+        <option value="$PROJECT_DIR$/production/StayFocusedUI/version notes.txt" />
+        <option value="$PROJECT_DIR$/production/StayFocusedUI/StayFocusedUI.lua" />
+        <option value="$PROJECT_DIR$/src/StayFocusedEasyJobs.lua" />
+        <option value="$PROJECT_DIR$/src/StayFocusedUI.xml" />
+        <option value="$PROJECT_DIR$/src/StayFocusedUI.lua" />
+        <option value="$PROJECT_DIR$/src/version notes.txt" />
+        <option value="$PROJECT_DIR$/src/StayFocusedUI.toc" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="2498" />
+    <option name="y" value="-24" />
+    <option name="width" value="2568" />
+    <option name="height" value="1423" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+          <State>
+            <id>General</id>
+          </State>
+          <State>
+            <id>Kotlin</id>
+          </State>
+          <State>
+            <id>Plugin DevKit</id>
+          </State>
+          <State>
+            <id>Redundant constructsKotlin</id>
+          </State>
+          <State>
+            <id>Style issuesKotlin</id>
+          </State>
+        </expanded-state>
+      </profile-state>
+    </entry>
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages ProjectPane="false" />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <expand>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="StayFocusedUI" type="b2602c69:ProjectViewProjectNode" />
+              <item name="StayFocusedUI" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="StayFocusedUI" type="b2602c69:ProjectViewProjectNode" />
+              <item name="StayFocusedUI" type="462c0819:PsiDirectoryNode" />
+              <item name="archives" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="StayFocusedUI" type="b2602c69:ProjectViewProjectNode" />
+              <item name="StayFocusedUI" type="462c0819:PsiDirectoryNode" />
+              <item name="production" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="StayFocusedUI" type="b2602c69:ProjectViewProjectNode" />
+              <item name="StayFocusedUI" type="462c0819:PsiDirectoryNode" />
+              <item name="production" type="462c0819:PsiDirectoryNode" />
+              <item name="StayFocusedUI" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="StayFocusedUI" type="b2602c69:ProjectViewProjectNode" />
+              <item name="StayFocusedUI" type="462c0819:PsiDirectoryNode" />
+              <item name="production" type="462c0819:PsiDirectoryNode" />
+              <item name="StayFocusedUI" type="462c0819:PsiDirectoryNode" />
+              <item name="Libs" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="StayFocusedUI" type="b2602c69:ProjectViewProjectNode" />
+              <item name="StayFocusedUI" type="462c0819:PsiDirectoryNode" />
+              <item name="production" type="462c0819:PsiDirectoryNode" />
+              <item name="StayFocusedUI" type="462c0819:PsiDirectoryNode" />
+              <item name="Sounds" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="StayFocusedUI" type="b2602c69:ProjectViewProjectNode" />
+              <item name="StayFocusedUI" type="462c0819:PsiDirectoryNode" />
+              <item name="production" type="462c0819:PsiDirectoryNode" />
+              <item name="StayFocusedUI" type="462c0819:PsiDirectoryNode" />
+              <item name="Textures" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="StayFocusedUI" type="b2602c69:ProjectViewProjectNode" />
+              <item name="StayFocusedUI" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="StayFocusedUI" type="b2602c69:ProjectViewProjectNode" />
+              <item name="StayFocusedUI" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Textures" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="PackagesPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="StayFocusedUI" type="58d84e3e:PackageViewProjectNode" />
+              <item name="StayFocusedUI" type="616d4139:PackageViewModuleNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scratches" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="last_opened_file_path" value="$USER_HOME$/AppData/Local/GitHub/PortableGit_f02737a78695063deace08e96d5042710d3e32db/cmd/git.exe" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\wow-g\IdeaProjects\StayFocusedUI\src\Textures" />
+      <recent name="C:\Users\wow-g\IdeaProjects\StayFocusedUI\src" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\wow-g\IdeaProjects\StayFocusedUI\src" />
+      <recent name="C:\Users\wow-g\IdeaProjects\StayFocusedUI" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <module />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+      <option name="PROGRAM_PARAMETERS" />
+      <predefined_log_file id="idea.log" enabled="true" />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+    </configuration>
+    <configuration name="&lt;template&gt;" type="TestNG" default="true" selected="false">
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+    </configuration>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="878438f2-67dd-4b40-b0bc-40cf72f9ac15" name="Default" comment="" />
+      <created>1508174748623</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1508174748623</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Initial commit">
+      <created>1510334521184</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1510334521184</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Version: 171111-00001 :&#10; - Add comments">
+      <created>1510395238949</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1510395238949</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Version: 171111-00002 :&#10; - FUNC-014 : rare and treasures detection fixed">
+      <created>1510438174047</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1510438174047</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Version: 191111-00003 :&#10; - FUNC-017 : Enable double click fishing with or without fishing pole equipped&#10; - FUNC-018 : Enable double click survey&#10; - MOD-UI-012 : Fixed unit frames health bar with class color&#10; - TECH-007 : Useless CVars deleted">
+      <created>1511098090196</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1511098090196</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Version: 191111-00004 :&#10; - TECH-007 : Raid CVars deleted, they do not override blizzards profils&#10; - FUNC-019 : Colorize PvE nameplates by threat for all roles (green : threat status corresponding to your role, red not corresponding, orange for status warning, blue for offtank) and resize nameplates while tanking&#10; - Reformat code and merge files.">
+      <created>1511107928055</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1511107928055</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="2552" y="-8" width="2576" height="1456" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2390625" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32932332" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32932332" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="LuaCheck" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3299923" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
+    <MESSAGE value="Initial commit" />
+    <MESSAGE value="Version: 171111-00001 :&#10; - Add comments" />
+    <MESSAGE value="Version: 171111-00002 :&#10; - FUNC-014 : rare and treasures detection fixed" />
+    <MESSAGE value="Version: 191111-00003 :&#10; - FUNC-017 : Enable double click fishing with or without fishing pole equipped&#10; - FUNC-018 : Enable double click survey&#10; - MOD-UI-012 : Fixed unit frames health bar with class color&#10; - TECH-007 : Useless CVars deleted" />
+    <MESSAGE value="Version: 191111-00004 :&#10; - TECH-007 : Raid CVars deleted, they do not override blizzards profils&#10; - FUNC-019 : Colorize PvE nameplates by threat for all roles (green : threat status corresponding to your role, red not corresponding, orange for status warning, blue for offtank) and resize nameplates while tanking&#10; - Reformat code and merge files." />
+    <option name="LAST_COMMIT_MESSAGE" value="Version: 191111-00004 :&#10; - TECH-007 : Raid CVars deleted, they do not override blizzards profils&#10; - FUNC-019 : Colorize PvE nameplates by threat for all roles (green : threat status corresponding to your role, red not corresponding, orange for status warning, blue for offtank) and resize nameplates while tanking&#10; - Reformat code and merge files." />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/archives/Interface/CVars/CVars_Controls.lua" />
+    <entry file="file://$PROJECT_DIR$/archives/Interface/CVars/CVars_FloatingCombatTxt.lua" />
+    <entry file="file://$PROJECT_DIR$/archives/Interface/CVars/cvars.lua" />
+    <entry file="file://$PROJECT_DIR$/archives/Interface/CVars/CVars_Graphics.lua" />
+    <entry file="file://$PROJECT_DIR$/archives/Interface/CVars/CVars_Interface.lua" />
+    <entry file="file://$PROJECT_DIR$/archives/Interface/CVars/CVars_Nameplates.lua" />
+    <entry file="file://$PROJECT_DIR$/archives/Interface/CVars/CVars_ObjectiveTracker.lua" />
+    <entry file="file://$PROJECT_DIR$/archives/Interface/CVars/CVars_Threat.lua" />
+    <entry file="file://$PROJECT_DIR$/archives/Interface/CVars/CVars_Sound.lua" />
+    <entry file="file://$PROJECT_DIR$/archives/Interface/Bars/Clean.lua" />
+    <entry file="file://$PROJECT_DIR$/archives/Interface/Chat/Clean.lua" />
+    <entry file="file://$PROJECT_DIR$/archives/Interface/Chat/Chat.lua" />
+    <entry file="file://$PROJECT_DIR$/archives/Interface/Bars_AntiBlizzardOverriding.lua" />
+    <entry file="file://$PROJECT_DIR$/archives/Interface/Bars_Bags.lua" />
+    <entry file="file://$PROJECT_DIR$/archives/Interface/Bars_ExpBars.lua" />
+    <entry file="file://$PROJECT_DIR$/archives/Interface/Bars_ExtraAction.lua" />
+    <entry file="file://$PROJECT_DIR$/archives/Interface/Bars_MainBar.lua" />
+    <entry file="file://$PROJECT_DIR$/archives/Interface/Bars_MulitBarBottomLeft.lua" />
+    <entry file="file://$PROJECT_DIR$/archives/Interface/Bars_MicroButtons.lua" />
+    <entry file="file://$PROJECT_DIR$/archives/Interface/Bars_MulitBarBottomRight.lua" />
+    <entry file="file://$PROJECT_DIR$/archives/Interface/Bars_MulitBarLeft.lua" />
+    <entry file="file://$PROJECT_DIR$/archives/Interface/Bars_MulitBarRight.lua" />
+    <entry file="file://$PROJECT_DIR$/archives/Interface/Bars_ZoneAbility.lua" />
+    <entry file="file://$PROJECT_DIR$/archives/Interface/Unit_PlayerCastingBar.lua" />
+    <entry file="file://$PROJECT_DIR$/archives/Interface/skin.lua" />
+    <entry file="file://$PROJECT_DIR$/archives/Interface/Map/CalendarTrackingButton.lua" />
+    <entry file="file://$PROJECT_DIR$/archives/Interface/Units/TargetAura.lua" />
+    <entry file="file://$PROJECT_DIR$/archives/Interface/Units/Target.lua" />
+    <entry file="file://$PROJECT_DIR$/archives/Interface/Units/Player.lua" />
+    <entry file="file://$PROJECT_DIR$/archives/Interface/Misc/BossBanner.lua" />
+    <entry file="file://$PROJECT_DIR$/archives/Interface/Misc/OrderHall.lua" />
+    <entry file="file://$PROJECT_DIR$/archives/Interface/Misc/TalkingHead.lua" />
+    <entry file="file://$PROJECT_DIR$/archives/Interface/Units/Boss.lua" />
+    <entry file="file://$PROJECT_DIR$/archives/Interface/Units/Focus.lua" />
+    <entry file="file://$PROJECT_DIR$/archives/Interface/Misc/ObjectiveTracker.lua" />
+    <entry file="file://$PROJECT_DIR$/archives/Interface/Map/GarrisonButton.lua" />
+    <entry file="file://$PROJECT_DIR$/archives/Interface/Map/Zoom.lua" />
+    <entry file="file://$PROJECT_DIR$/archives/Interface/Map/Minimap.lua" />
+    <entry file="file://$PROJECT_DIR$/archives/Services/slash.lua" />
+    <entry file="file://$PROJECT_DIR$/archives/Services/core.lua" />
+    <entry file="file://$PROJECT_DIR$/production/StayFocusedUI/StayFocusedUI.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="29" lean-forward="false" selection-start-line="5" selection-start-column="29" selection-end-line="5" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/archives/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="15" lean-forward="false" selection-start-line="0" selection-start-column="15" selection-end-line="0" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/StayFocusedOptions.lua" />
+    <entry file="file://$PROJECT_DIR$/production/StayFocusedUI/version notes.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="89" lean-forward="false" selection-start-line="6" selection-start-column="89" selection-end-line="6" selection-end-column="89" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/StayFocusedEasyJobs.lua">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/StayFocusedUI.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="5" lean-forward="true" selection-start-line="6" selection-start-column="5" selection-end-line="6" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/production/StayFocusedUI/StayFocusedUI.lua">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="46">
+          <caret line="975" column="46" lean-forward="true" selection-start-line="975" selection-start-column="46" selection-end-line="975" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/StayFocusedUI.lua">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="884">
+          <caret line="1270" column="0" lean-forward="false" selection-start-line="1270" selection-start-column="0" selection-end-line="1271" selection-end-column="205" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/StayFocusedUI.toc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="17" lean-forward="true" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/production/StayFocusedUI/StayFocusedUI.toc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="37" lean-forward="false" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/version notes.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="213" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>Lua</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>StayFocusedUI</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
