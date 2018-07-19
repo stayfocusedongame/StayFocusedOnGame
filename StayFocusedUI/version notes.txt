@@ -1,3 +1,11 @@
+--- Fixed by stayfocusedongame.
+--- DateTime: 2018/07/19 12:00
+---
+FUNC-016 : fixed
+--- Fixed by stayfocusedongame.
+--- DateTime: 2018/06/03 15:00
+---
+Battle for Azeroth alpha update
 ---
 --- Created by stayfocusedongame.
 --- DateTime: 2017/11/19 18:00

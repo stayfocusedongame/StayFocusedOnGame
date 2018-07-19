@@ -1,6 +1,6 @@
 ---
 --- Created by stayfocusedongame.
---- DateTime: 2017/11/19 15:00
+--- DateTime: 2018/07/19 12:00
 ---
 STAYFOCUSED, STAYFOCUSEDEVENTS = CreateFrame("FRAME", "STAYFOCUSED"), {};
 LibItemLevel = LibStub:GetLibrary("LibItemLevel.7000");
@@ -189,10 +189,18 @@ SlashCmdList.SF = function(option)
         cancel = true;
         if IsAddOnLoaded("DBM-Core") then
             SlashCmdList["DEADLYBOSSMODS"]("pull -1");
-        end;
-        if IsAddOnLoaded("BigWigs_Plugins") then
+        elseif IsAddOnLoaded("BigWigs_Plugins") then
             SlashCmdList["BIGWIGSPULL"]("/pull 0");
-        end;
+		else
+			if UnitIsGroupLeader("player") or UnitIsGroupAssistant("player") then
+				channel = "RAID";
+				user = nil;
+			else
+				channel = "WHISPER";
+				user = UnitName("player");
+			end;
+			SendChatMessage('WARNING DO NOT PULL !', channel, nil, user);
+		end;
     else
         print("Stay Focused Commands :");
         print("/sf rl = reload ui");
@@ -204,9 +212,6 @@ SlashCmdList.SF = function(option)
         print("/sf rc = perform ready check");
         print("/sf pull = pull timer 10 sec");
         print("/sf stop = stop pull timer");
-        print("/sf healmode = raid frames for healing");
-        print("/sf tankmode = raid frames for tanking");
-        print("/sf dpsmode = raid frames for damaging");
     end;
 end;
 --- TECH-006 :
@@ -591,9 +596,9 @@ if LoadAddOn("Blizzard_ArenaUI") then
     ArenaEnemyFrame2:ClearAllPoints();
     ArenaEnemyFrame3:ClearAllPoints();
     ArenaEnemyFrames:SetScale(2);
-    ArenaEnemyFrame1:SetPoint("CENTER", UIParent, "CENTER", -200, 50);
-    ArenaEnemyFrame2:SetPoint("CENTER", UIParent, "CENTER", -200, 0);
-    ArenaEnemyFrame3:SetPoint("CENTER", UIParent, "CENTER", -200, -50);
+    ArenaEnemyFrame1:SetPoint("CENTER", UIParent, "CENTER", -175, 50);
+    ArenaEnemyFrame2:SetPoint("CENTER", UIParent, "CENTER", -150, 0);
+    ArenaEnemyFrame3:SetPoint("CENTER", UIParent, "CENTER", -125, -50);
     ArenaEnemyFrame1.SetPoint = function()
     end;
     ArenaEnemyFrame2.SetPoint = function()
@@ -612,40 +617,55 @@ if LoadAddOn("Blizzard_TalkingHeadUI") then
     TalkingHeadFrame:UnregisterAllEvents();
 end;
 --- MOD-UI-019 :
--- Colorize action bar, units, minimap with faction color (horde, alliance and neutral)
+-- Colorize action bar, units, mini-map with faction color (horde, alliance and neutral)
 -- Replace end caps with customized ones (horde, alliance and neutral)
 function STAYFOCUSEDEVENTS:ADDON_LOADED(...)
     local red, geen, blue;
     local faction, _ = UnitFactionGroup("player");
     if faction == "Horde" then
-        MainMenuBarRightEndCap:SetTexture("Interface\\AddOns\\StayFocusedUI\\Textures\\endcap horde.png");
-        MainMenuBarLeftEndCap:SetTexture("Interface\\AddOns\\StayFocusedUI\\Textures\\endcap horde.png");
+        MainMenuBarArtFrame.LeftEndCap:SetTexture("Interface\\AddOns\\StayFocusedUI\\Textures\\endcap horde.png");
+        MainMenuBarArtFrame.RightEndCap:SetTexture("Interface\\AddOns\\StayFocusedUI\\Textures\\endcap horde.png");
         red = 0.55;
         blue = 0;
     elseif faction == "Alliance" then
-        MainMenuBarRightEndCap:SetTexture("Interface\\AddOns\\StayFocusedUI\\Textures\\endcap alliance.png");
-        MainMenuBarLeftEndCap:SetTexture("Interface\\AddOns\\StayFocusedUI\\Textures\\endcap alliance.png");
+        MainMenuBarArtFrame.LeftEndCap:SetTexture("Interface\\AddOns\\StayFocusedUI\\Textures\\endcap alliance.png");
+
+        MainMenuBarArtFrame.RightEndCap:SetTexture("Interface\\AddOns\\StayFocusedUI\\Textures\\endcap alliance.png");
+
         red = 0.3;
         green = 0.4;
         blue = 1;
     else
-        MainMenuBarRightEndCap:SetTexture("Interface\\AddOns\\StayFocusedUI\\Textures\\endcap neutral.png");
-        MainMenuBarLeftEndCap:SetTexture("Interface\\AddOns\\StayFocusedUI\\Textures\\endcap neutral.png");
+        MainMenuBarArtFrame.LeftEndCap:SetTexture("Interface\\AddOns\\StayFocusedUI\\Textures\\endcap neutral.png");
+        MainMenuBarArtFrame.RightEndCap:SetTexture("Interface\\AddOns\\StayFocusedUI\\Textures\\endcap neutral.png");
         red = 0.98;
         green = 0.84;
         blue = 0.11;
     end
-    for i, v in pairs({
-        ArtifactWatchBar.StatusBar.WatchBarTexture0, ArtifactWatchBar.StatusBar.WatchBarTexture1, ArtifactWatchBar.StatusBar.WatchBarTexture2, ArtifactWatchBar.StatusBar.WatchBarTexture3, ArtifactWatchBar.StatusBar.XPBarTexture0, ArtifactWatchBar.StatusBar.XPBarTexture1,
-        ArtifactWatchBar.StatusBar.XPBarTexture2, ArtifactWatchBar.StatusBar.XPBarTexture3, BonusActionBarFrameTexture0, BonusActionBarFrameTexture1, BonusActionBarFrameTexture2, BonusActionBarFrameTexture3, BonusActionBarFrameTexture4, CastingBarFrameBorder, FocusFrameSpellBarBorder,
-        FocusFrameTextureFrameTexture, FocusFrameToTTextureFrameTexture, HonorWatchBar.StatusBar.WatchBarTexture0, HonorWatchBar.StatusBar.WatchBarTexture1, HonorWatchBar.StatusBar.WatchBarTexture2, HonorWatchBar.StatusBar.WatchBarTexture3, HonorWatchBar.StatusBar.XPBarTexture0,
-        HonorWatchBar.StatusBar.XPBarTexture1, HonorWatchBar.StatusBar.XPBarTexture2, HonorWatchBar.StatusBar.XPBarTexture3, MainMenuBarTexture0, MainMenuBarTexture1, MainMenuBarTexture2, MainMenuBarTexture3, MainMenuExpBar.WatchBarTexture0, MainMenuExpBar.WatchBarTexture1,
-        MainMenuExpBar.WatchBarTexture2, MainMenuExpBar.WatchBarTexture3, MainMenuExpBar.XPBarTexture0, MainMenuExpBar.XPBarTexture1, MainMenuExpBar.XPBarTexture2, MainMenuExpBar.XPBarTexture3, MainMenuMaxLevelBar0, MainMenuMaxLevelBar1, MainMenuMaxLevelBar2, MainMenuMaxLevelBar3,
+        MainMenuBarArtFrame.LeftEndCap:SetHeight(MainMenuBarArtFrame.LeftEndCap:GetHeight() + 5)
+        MainMenuBarArtFrame.LeftEndCap:SetScale(1)
+        MainMenuBarArtFrame.LeftEndCap:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 0)
+        MainMenuBarArtFrame.RightEndCap:SetHeight(MainMenuBarArtFrame.RightEndCap:GetHeight() + 5)
+        MainMenuBarArtFrame.RightEndCap:SetScale(1)
+        MainMenuBarArtFrame.RightEndCap:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 0)
+		
+    for i, v in pairs({MainMenuBarArtFrameBackground.BackgroundLarge, MainMenuBarArtFrameBackground.BackgroundSmall, MicroButtonAndBagsBar.MicroBagBar,
+       -- ArtifactWatchBar.StatusBar.WatchBarTexture0, ArtifactWatchBar.StatusBar.WatchBarTexture1, ArtifactWatchBar.StatusBar.WatchBarTexture2, ArtifactWatchBar.StatusBar.WatchBarTexture3, ArtifactWatchBar.StatusBar.XPBarTexture0, ArtifactWatchBar.StatusBar.XPBarTexture1,
+       -- ArtifactWatchBar.StatusBar.XPBarTexture2, ArtifactWatchBar.StatusBar.XPBarTexture3,
+		BonusActionBarFrameTexture0, BonusActionBarFrameTexture1, BonusActionBarFrameTexture2, BonusActionBarFrameTexture3, BonusActionBarFrameTexture4, CastingBarFrameBorder, FocusFrameSpellBarBorder,
+        FocusFrameTextureFrameTexture, FocusFrameToTTextureFrameTexture,
+	   -- HonorWatchBar.StatusBar.WatchBarTexture0, HonorWatchBar.StatusBar.WatchBarTexture1, HonorWatchBar.StatusBar.WatchBarTexture2, HonorWatchBar.StatusBar.WatchBarTexture3, HonorWatchBar.StatusBar.XPBarTexture0,
+       -- HonorWatchBar.StatusBar.XPBarTexture1, HonorWatchBar.StatusBar.XPBarTexture2, HonorWatchBar.StatusBar.XPBarTexture3, 
+		MainMenuBarTexture0, MainMenuBarTexture1, MainMenuBarTexture2, MainMenuBarTexture3, 
+	   -- MainMenuExpBar.WatchBarTexture0, MainMenuExpBar.WatchBarTexture1, MainMenuExpBar.WatchBarTexture2, MainMenuExpBar.WatchBarTexture3, MainMenuExpBar.XPBarTexture0, MainMenuExpBar.XPBarTexture1, MainMenuExpBar.XPBarTexture2, MainMenuExpBar.XPBarTexture3, 
+	   MainMenuMaxLevelBar0, MainMenuMaxLevelBar1, MainMenuMaxLevelBar2, MainMenuMaxLevelBar3,
         MainMenuXPBarDiv1, MainMenuXPBarDiv2, MainMenuXPBarDiv3, MainMenuXPBarDiv4, MainMenuXPBarDiv5, MainMenuXPBarDiv6, MainMenuXPBarDiv7, MainMenuXPBarDiv8, MainMenuXPBarDiv9, MainMenuXPBarDiv10, MainMenuXPBarDiv11, MainMenuXPBarDiv12, MainMenuXPBarDiv13, MainMenuXPBarDiv14,
         MainMenuXPBarDiv15, MainMenuXPBarDiv16, MainMenuXPBarDiv17, MainMenuXPBarDiv18, MainMenuXPBarDiv19, MainMenuXPBarTextureLeftCap, MainMenuXPBarTextureMid, MainMenuXPBarTextureRightCap, MiniMapBattlefieldBorder, MiniMapLFGFrameBorder, MiniMapMailBorder, MiniMapTrackingButtonBorder,
         MinimapBorder, MinimapBorderTop, PartyMemberFrame1PetFrameTexture, PartyMemberFrame1Texture, PartyMemberFrame2PetFrameTexture, PartyMemberFrame2Texture, PartyMemberFrame3PetFrameTexture, PartyMemberFrame3Texture, PartyMemberFrame4PetFrameTexture, PartyMemberFrame4Texture,
-        PetFrameTexture, PlayerFrameTexture, ReputationWatchBar.StatusBar.WatchBarTexture0, ReputationWatchBar.StatusBar.WatchBarTexture1, ReputationWatchBar.StatusBar.WatchBarTexture2, ReputationWatchBar.StatusBar.WatchBarTexture3, ReputationWatchBar.StatusBar.XPBarTexture0,
-        ReputationWatchBar.StatusBar.XPBarTexture1, ReputationWatchBar.StatusBar.XPBarTexture2, ReputationWatchBar.StatusBar.XPBarTexture3, TargetFrameSpellBarBorder, TargetFrameTextureFrameTexture, TargetFrameToTTextureFrameTexture,
+        PetFrameTexture, PlayerFrameTexture, 
+	  -- ReputationWatchBar.StatusBar.WatchBarTexture0, ReputationWatchBar.StatusBar.WatchBarTexture1, ReputationWatchBar.StatusBar.WatchBarTexture2, ReputationWatchBar.StatusBar.WatchBarTexture3, ReputationWatchBar.StatusBar.XPBarTexture0,
+      -- ReputationWatchBar.StatusBar.XPBarTexture1, ReputationWatchBar.StatusBar.XPBarTexture2, ReputationWatchBar.StatusBar.XPBarTexture3, 
+		TargetFrameSpellBarBorder, TargetFrameTextureFrameTexture, TargetFrameToTTextureFrameTexture,
     }) do
         v:SetDesaturated(true);
         v:SetVertexColor(red, green, blue);
@@ -734,10 +754,10 @@ end;
 -- Send chat messages in raid warning with specific sound (guild, guild officer, instance, instance leader, party, party leader, raid, raid leader, whisper and battle net)
 -- Associated with TECH-006
 function STAYFOCUSEDEVENTS:CHAT_MSG_GUILD(...)
-    SendAs(select(1, ...), select(5, ...), "GUILD", "Interface\\AddOns\\StayFocusedUI\\Sounds\\chatogg");
+    SendAs(select(1, ...), select(5, ...), "GUILD", "Interface\\AddOns\\StayFocusedUI\\Sounds\\chat_g.ogg");
 end;
 function STAYFOCUSEDEVENTS:CHAT_MSG_OFFICER(...)
-    SendAs(select(1, ...), select(5, ...), "GUILD", "Interface\\AddOns\\StayFocusedUI\\Sounds\\chatogg");
+    SendAs(select(1, ...), select(5, ...), "GUILD", "Interface\\AddOns\\StayFocusedUI\\Sounds\\chat_g.ogg");
 end;
 function STAYFOCUSEDEVENTS:CHAT_MSG_INSTANCE_CHAT(...)
     SendAs(select(1, ...), select(5, ...), "PARTY", "Interface\\AddOns\\StayFocusedUI\\Sounds\\chat_i.ogg");
@@ -756,9 +776,6 @@ function STAYFOCUSEDEVENTS:CHAT_MSG_RAID(...)
 end;
 function STAYFOCUSEDEVENTS:CHAT_MSG_RAID_LEADER(...)
     SendAs(select(1, ...), select(5, ...), "RAID", "Interface\\AddOns\\StayFocusedUI\\Sounds\\chat_i.ogg");
-end;
-function STAYFOCUSEDEVENTS:CHAT_MSG_BN_CONVERSATION(...)
-    SendAs(select(1, ...), select(5, ...), "BN_WHISPER", "Interface\\AddOns\\StayFocusedUI\\Sounds\\chat_w.ogg");
 end;
 function STAYFOCUSEDEVENTS:CHAT_MSG_BN_INLINE_TOAST_BROADCAST(...)
     SendAs(select(1, ...), select(5, ...), "BN_WHISPER", "Interface\\AddOns\\StayFocusedUI\\Sounds\\chat_w.ogg");
@@ -952,8 +969,9 @@ function STAYFOCUSEDEVENTS:PLAYER_DEAD(...)
     end;
 end;
 --- FUNC-014 :
--- Announce minimap : rares, treasures except garrison cache (raid waning and sound)
-function STAYFOCUSEDEVENTS:VIGNETTE_ADDED(...)
+-- Announce mini-map : rares, treasures except garrison cache (raid warning and sound)
+function STAYFOCUSEDEVENTS:VIGNETTE_MINIMAP_UPDATED(...)
+	local pinsToRemove = {};
     if GetLocale() == "frFR" then
         isGarrisonCache = "Cache du fief";
         isDetected = "détecté";
@@ -961,15 +979,17 @@ function STAYFOCUSEDEVENTS:VIGNETTE_ADDED(...)
         isGarrisonCache = "Garrison cache";
         isDetected = "detected";
     end;
-    vignetteID = select(1, ...);
-    if vignetteID then
-        _, _, name, _ = C_Vignettes.GetVignetteInfoFromInstanceID(vignetteID);
+    vignetteGUID = select(1, ...);
+	added =  select(2, ...);
+    if vignetteGUID and added then
+ 		local vignetteInfo = C_VignetteInfo.GetVignetteInfo(vignetteGUID);
+        name, _ = vignetteInfo.name;
         if name ~= nil and name ~= isGarrisonCache then
             message = "|cff00ff00" .. name .. " " .. isDetected .. "!|r";
             RaidNotice_AddMessage(RaidWarningFrame, message, ChatTypeInfo["RAID_WARNING"]);
             PlaySoundFile("Interface\\AddOns\\StayFocusedUI\\Sounds\\rare_and_treasure.ogg", "Master");
-        end;
-    end;
+        end;  
+     end;
 end;
 --- FUNC-015 :
 -- Confirm summon
@@ -982,17 +1002,25 @@ end;
 --- FUNC-016 :
 -- Announce spell interruption when player in party or raid
 function STAYFOCUSEDEVENTS:COMBAT_LOG_EVENT_UNFILTERED(...)
-    _, action, _, _, sourceName, _, _, _, _, _, _, _, _, _, spell, _, _, _, _, _, _, _, _ = ...
-    if GetLocale() == "frFR" then
+	local _, action, _, sourceGUID, _, _, _, _, destName, _, _, _, _, _, spellID, spellName = CombatLogGetCurrentEventInfo()
+	-- debug
+	-- if sourceGUID == UnitGUID("player") then
+    -- print("action="..tostring(action).."+sourceGUID="..tostring(sourceGUID).."+spellID="..tostring(spellID))
+	-- end
+	if GetLocale() == "frFR" then
         isKicked = "interrompu";
     else
         isKicked = "interrupted";
     end;
-    if action == "SPELL_INTERRUPT" and (sourceName == UnitName("player") or sourceName == UnitName("pet")) then
-        if IsInRaid() then
-            SendChatMessage(GetSpellLink(spell) .. " " .. tostring(isKicked), "RAID");
+    if action == "SPELL_INTERRUPT" and (sourceGUID == UnitGUID("player") or sourceGUID == UnitGUID("pet")) then
+        if IsInGroup(LE_PARTY_CATEGORY_INSTANCE) then
+            SendChatMessage(GetSpellLink(spellID) .. " " .. tostring(isKicked), "INSTANCE_CHAT");
+		elseif IsInRaid() then
+            SendChatMessage(GetSpellLink(spellID) .. " " .. tostring(isKicked), "RAID");
         elseif IsInGroup() then
-            SendChatMessage(GetSpellLink(spell) .. " " .. tostring(isKicked), "PARTY");
+			SendChatMessage(GetSpellLink(spellID) .. " " .. tostring(isKicked), "PARTY");
+		else 
+			SendChatMessage(GetSpellLink(spellID) .. " " .. tostring(isKicked), "SAY");
         end;
     end;
 end;
@@ -1269,7 +1297,7 @@ GameTooltip:HookScript("OnShow", function(self)
     STAYFOCUSED_SURVEYINGTIMER:Play();
 end);
 --- FUNC-019 :
--- Colorize PvE nameplates by threat for all roles (green : threat status corresponding to your role, red not corresponding, orange for status warning, blue for offtank) and resize nameplates while tanking
+-- Colorize PvE nameplates by threat for all roles (green : threat status corresponding to your role, red not corresponding, orange for status warning, blue for off-tank) and resize nameplates while tanking
 local offTanks = {};
 local function resetFrame(frame)
     if frame.threat then
@@ -1358,7 +1386,7 @@ local function updateThreatColor(frame)
                     r, g, b = 0, 1, 0; else r, g, b = 1, 0, 0;
                 end;
             elseif threat == 4 then
-                -- offtank is tanking
+                -- off-tank is tanking
                 if playerRole == "TANK" then
                     r, g, b = 0, 0, 1; else r, g, b = 0, 1, 0;
                 end;
@@ -1411,6 +1439,9 @@ end);
 --- Handler
 STAYFOCUSED:SetScript("OnEvent", function(self, event, ...)
     STAYFOCUSEDEVENTS[event](self, ...);
+	-- debug
+	-- arg1, arg2, arg3, arg4, arg5,arg6, arg7, arg8, arg9 = select(1, ...), select(2, ...), select(3, ...), select(4, ...), select(5, ...), select(6, ...), select(7, ...), select(8, ...), select(9, ...)
+	-- print(tostring(event).."-arg1-"..tostring(arg1).."-arg2-"..tostring(arg2).."-arg3-"..tostring(arg3).."-arg4-"..tostring(arg4).."-arg5-"..tostring(arg5).."-arg6-"..tostring(arg6).."-arg7-"..tostring(arg7).."-arg8-"..tostring(arg8).."-arg9-"..tostring(arg9))
 end);
 for k, _ in pairs(STAYFOCUSEDEVENTS) do
     STAYFOCUSED:RegisterEvent(k);
