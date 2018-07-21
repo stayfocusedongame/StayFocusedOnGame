@@ -1,3 +1,9 @@
+---
+--- Created by stayfocusedongame.
+--- DateTime: 2018/07/21 18:15
+---
+MOD-UI-019 : end cap size fixed
+MOD-UI-016 : error whebn entering in dj fixed
 --- Fixed by stayfocusedongame.
 --- DateTime: 2018/07/19 12:00
 ---

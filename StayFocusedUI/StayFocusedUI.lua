@@ -1,6 +1,6 @@
 ---
 --- Created by stayfocusedongame.
---- DateTime: 2018/07/19 12:00
+--- DateTime: 2018/07/21 18:15
 ---
 STAYFOCUSED, STAYFOCUSEDEVENTS = CreateFrame("FRAME", "STAYFOCUSED"), {};
 LibItemLevel = LibStub:GetLibrary("LibItemLevel.7000");
@@ -605,6 +605,8 @@ if LoadAddOn("Blizzard_ArenaUI") then
     end;
     ArenaEnemyFrame3.SetPoint = function()
     end;
+else 
+	LoadAddOn("Blizzard_ArenaUI")
 end;
 --- MOD-UI-017 :
 -- Hide boss banner
@@ -626,12 +628,11 @@ function STAYFOCUSEDEVENTS:ADDON_LOADED(...)
         MainMenuBarArtFrame.LeftEndCap:SetTexture("Interface\\AddOns\\StayFocusedUI\\Textures\\endcap horde.png");
         MainMenuBarArtFrame.RightEndCap:SetTexture("Interface\\AddOns\\StayFocusedUI\\Textures\\endcap horde.png");
         red = 0.55;
+		green = 0;
         blue = 0;
     elseif faction == "Alliance" then
         MainMenuBarArtFrame.LeftEndCap:SetTexture("Interface\\AddOns\\StayFocusedUI\\Textures\\endcap alliance.png");
-
         MainMenuBarArtFrame.RightEndCap:SetTexture("Interface\\AddOns\\StayFocusedUI\\Textures\\endcap alliance.png");
-
         red = 0.3;
         green = 0.4;
         blue = 1;
@@ -642,14 +643,18 @@ function STAYFOCUSEDEVENTS:ADDON_LOADED(...)
         green = 0.84;
         blue = 0.11;
     end
-        MainMenuBarArtFrame.LeftEndCap:SetHeight(MainMenuBarArtFrame.LeftEndCap:GetHeight() + 5)
+		MainMenuBarArtFrame.LeftEndCap:SetHeight(130)
+		MainMenuBarArtFrame.RightEndCap:SetHeight(130)
         MainMenuBarArtFrame.LeftEndCap:SetScale(1)
-        MainMenuBarArtFrame.LeftEndCap:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 0)
-        MainMenuBarArtFrame.RightEndCap:SetHeight(MainMenuBarArtFrame.RightEndCap:GetHeight() + 5)
         MainMenuBarArtFrame.RightEndCap:SetScale(1)
-        MainMenuBarArtFrame.RightEndCap:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 0)
+		MainMenuBarArtFrameBackground.BackgroundSmall:SetDrawLayer("ARTWORK",1)
+		MainMenuBarArtFrame.RightEndCap:SetDrawLayer("ARTWORK",-1)
+		 
+       MainMenuBarArtFrame.LeftEndCap:SetPoint("BOTTOM", MainMenuBar, "BOTTOM", 0, 0)
+       MainMenuBarArtFrame.RightEndCap:SetPoint("BOTTOM", MainMenuBar, "BOTTOM", 0, 0)
+
 		
-    for i, v in pairs({MainMenuBarArtFrameBackground.BackgroundLarge, MainMenuBarArtFrameBackground.BackgroundSmall, MicroButtonAndBagsBar.MicroBagBar,
+    for i, v in pairs({MainMenuBarArtFrameBackground.WatchBar, MainMenuBarArtFrameBackground.BackgroundLarge, MainMenuBarArtFrameBackground.BackgroundSmall, MicroButtonAndBagsBar.MicroBagBar,
        -- ArtifactWatchBar.StatusBar.WatchBarTexture0, ArtifactWatchBar.StatusBar.WatchBarTexture1, ArtifactWatchBar.StatusBar.WatchBarTexture2, ArtifactWatchBar.StatusBar.WatchBarTexture3, ArtifactWatchBar.StatusBar.XPBarTexture0, ArtifactWatchBar.StatusBar.XPBarTexture1,
        -- ArtifactWatchBar.StatusBar.XPBarTexture2, ArtifactWatchBar.StatusBar.XPBarTexture3,
 		BonusActionBarFrameTexture0, BonusActionBarFrameTexture1, BonusActionBarFrameTexture2, BonusActionBarFrameTexture3, BonusActionBarFrameTexture4, CastingBarFrameBorder, FocusFrameSpellBarBorder,
@@ -658,7 +663,7 @@ function STAYFOCUSEDEVENTS:ADDON_LOADED(...)
        -- HonorWatchBar.StatusBar.XPBarTexture1, HonorWatchBar.StatusBar.XPBarTexture2, HonorWatchBar.StatusBar.XPBarTexture3, 
 		MainMenuBarTexture0, MainMenuBarTexture1, MainMenuBarTexture2, MainMenuBarTexture3, 
 	   -- MainMenuExpBar.WatchBarTexture0, MainMenuExpBar.WatchBarTexture1, MainMenuExpBar.WatchBarTexture2, MainMenuExpBar.WatchBarTexture3, MainMenuExpBar.XPBarTexture0, MainMenuExpBar.XPBarTexture1, MainMenuExpBar.XPBarTexture2, MainMenuExpBar.XPBarTexture3, 
-	   MainMenuMaxLevelBar0, MainMenuMaxLevelBar1, MainMenuMaxLevelBar2, MainMenuMaxLevelBar3,
+		MainMenuMaxLevelBar0, MainMenuMaxLevelBar1, MainMenuMaxLevelBar2, MainMenuMaxLevelBar3,
         MainMenuXPBarDiv1, MainMenuXPBarDiv2, MainMenuXPBarDiv3, MainMenuXPBarDiv4, MainMenuXPBarDiv5, MainMenuXPBarDiv6, MainMenuXPBarDiv7, MainMenuXPBarDiv8, MainMenuXPBarDiv9, MainMenuXPBarDiv10, MainMenuXPBarDiv11, MainMenuXPBarDiv12, MainMenuXPBarDiv13, MainMenuXPBarDiv14,
         MainMenuXPBarDiv15, MainMenuXPBarDiv16, MainMenuXPBarDiv17, MainMenuXPBarDiv18, MainMenuXPBarDiv19, MainMenuXPBarTextureLeftCap, MainMenuXPBarTextureMid, MainMenuXPBarTextureRightCap, MiniMapBattlefieldBorder, MiniMapLFGFrameBorder, MiniMapMailBorder, MiniMapTrackingButtonBorder,
         MinimapBorder, MinimapBorderTop, PartyMemberFrame1PetFrameTexture, PartyMemberFrame1Texture, PartyMemberFrame2PetFrameTexture, PartyMemberFrame2Texture, PartyMemberFrame3PetFrameTexture, PartyMemberFrame3Texture, PartyMemberFrame4PetFrameTexture, PartyMemberFrame4Texture,
@@ -1019,8 +1024,8 @@ function STAYFOCUSEDEVENTS:COMBAT_LOG_EVENT_UNFILTERED(...)
             SendChatMessage(GetSpellLink(spellID) .. " " .. tostring(isKicked), "RAID");
         elseif IsInGroup() then
 			SendChatMessage(GetSpellLink(spellID) .. " " .. tostring(isKicked), "PARTY");
-		else 
-			SendChatMessage(GetSpellLink(spellID) .. " " .. tostring(isKicked), "SAY");
+		-- else 
+			-- SendChatMessage(GetSpellLink(spellID) .. " " .. tostring(isKicked), "SAY");
         end;
     end;
 end;
