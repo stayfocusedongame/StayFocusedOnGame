@@ -1,50 +1,14 @@
----
---- Created by stayfocusedongame.
---- DateTime: 2018/07/21 18:15
----
-MOD-UI-019 : end cap size fixed
-MOD-UI-016 : error whebn entering in dj fixed
---- Fixed by stayfocusedongame.
---- DateTime: 2018/07/19 12:00
----
-FUNC-016 : fixed
---- Fixed by stayfocusedongame.
---- DateTime: 2018/06/03 15:00
----
-Battle for Azeroth alpha update
----
---- Created by stayfocusedongame.
---- DateTime: 2017/11/19 18:00
----
-TECH-007 : Raid CVars deleted, they do not override blizzards profils
-FUNC-019 : Colorize PvE nameplates by threat for all roles (green : threat status corresponding to your role, red not corresponding, orange for status warning, blue for offtank) and resize nameplates while tanking
-Reformat code and merge files.
----
---- Created by stayfocusedongame.
---- DateTime: 2017/11/19 15:00
----
-FUNC-017 : Enable double click fishing with or without fishing pole equipped
-FUNC-018 : Enable double click survey
----
---- Fixed by stayfocusedongame.
---- DateTime: 2017/11/19 15:00
----
-MOD-UI-012 : Fixed unit frames health bar with class color
-TECH-007 : Useless CVars deleted
----
---- Fixed by stayfocusedongame.
---- DateTime: 2017/11/11 23:00
----
-FUNC-014 : rare and treasures detection fixed
----
---- Created by stayfocusedongame.
---- DateTime: 2017/11/11 11:00
+--- Version: 180723-00008
+Modify MOD-UI-006, FUNC-005 and TECH-006 :
+ - clean chat messages
+ - clean chat report, /g and /o name display fixed, chan color fixed
+ - report targeticons while in group
 ---
 FUNC-001 : Perform ready check when in raid or group, if player is not leader or assistant, print help message in chat Associated with SLASH-CMD-007
 FUNC-002 : Perform 10 sec boss pull countdown Send raid chat message - or self whisper - at beginning, at pre potion (1 sec) and at pulling Synchronize with DBM and BIGWIGS boss pull timer Can be canceled Associated with SLASH-CMD-008 and SLASH-CMD-009
 FUNC-003 : Enable mousewheel zoom on minimap
 FUNC-004 : Accept quests Complete quests Skip quests details When multiple quest available, stand by for player choice Stop automation with shift key pressed
-FUNC-005 : Send chat messages in raid warning with specific sound (guild, guild officer, instance, instance leader, party, party leader, raid, raid leader, whisper and battle net) Associated with TECH-006
+FUNC-005 : Send chat messages in raid warning frame with specific sound (guild, guild officer, instance, instance leader, party, party leader, raid, raid leader, whisper and battle net and targeticons) Associated with TECH-006
 FUNC-006 : Confirm disenchant roll
 FUNC-007 : Confirm loot roll
 FUNC-008 : Confirm bind on pickup loot
@@ -56,12 +20,16 @@ FUNC-013 : Release corpse in pvp
 FUNC-014 : Announce minimap : rares, treasures except garrison cache (raid waning and sound)
 FUNC-015 : Confirm summon
 FUNC-016 : Announce spell interruption when player in party or raid
+FUNC-017 : Enable double click fishing with or without fishing pole equipped
+FUNC-018 : Enable double click survey
+FUNC-019 : Colorize PvE nameplates by threat for all roles (green : threat status corresponding to your role, red not corresponding, orange for status warning, blue for offtank) and resize nameplates while tanking
+
 MOD-UI-001 : Move FPS frame on bottom left corner Associated with SLASH-CMD-004
 MOD-UI-002 : Merge minimap's calendar button and minimap's tracking button
 MOD-UI-003 : Adjust hall and garrison scales
 MOD-UI-004 : Hide UIErrorFrame, unwanted bar elements and unwanted minimap elements
 MOD-UI-005 : Move objective tracker on upper left corner Set objective tracker max height at 75% screen
-MOD-UI-006 : Clean chat frame
+MOD-UI-006 : Clean chat frame and messages
 MOD-UI-007 : Move chat frame to lower left corner
 MOD-UI-008 : Move player, target and focus frames on right side closer to center
 MOD-UI-009 : Move, adjust scales and clean cast bars (player, target and focus)
@@ -78,6 +46,7 @@ MOD-UI-019 : Colorize action bar, units, minimap with faction color (horde, alli
 MOD-UI-020 : Show paper doll item level
 MOD-UI-021 : Show weapons and armors item level in bags Colorize item level when greater than 90% of equipped item level
 MOD-UI-022 : Collapse objectives in pvp
+
 TECH-001 : Create hidden frame attached to UIParent for secure hiding ui elements
 TECH-002 : Add a centralized moving function with frame, parent, point, relative to, relative point, x offset, y offset and scale options
 TECH-003 : Create a screen grid frame with colored lines to align ui elements Associated with SLASH-CMD-005 and SLASH-CMD-006
@@ -85,6 +54,7 @@ TECH-004 : Set game variables to show LUA warnings and LUA errors Print variable
 TECH-005 : Set game variables to hide LUA warnings and LUA errors Print variables status in chat Associated with SLASH-CMD-003
 TECH-006 : Add a centralized function witch send as a raid warning with message, sender, canal, sound options Associated with FUNC-005
 TECH-007 : Set game variables (raid frames, advanced combat logging, floating combat text, sound, camera, threat, screenshot ...)
+
 SLASH-CMD-001 : Add in game slash command (/sf rl) to reload ui
 SLASH-CMD-002 : Add in game slash command (/sf debugon) to enable LUA warnings and LUA errors Associated with TECH-004
 SLASH-CMD-003 : Add in game slash command (/sf debugon) to hide LUA warnings and LUA errors Associated with TECH-005

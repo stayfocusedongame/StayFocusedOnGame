@@ -1,10 +1,13 @@
 ---
 --- Created by stayfocusedongame.
---- DateTime: 2018/07/21 18:15
+--- Version: 180723-00008
 ---
 STAYFOCUSED, STAYFOCUSEDEVENTS = CreateFrame("FRAME", "STAYFOCUSED"), {};
 LibItemLevel = LibStub:GetLibrary("LibItemLevel.7000");
+---
 token = "";
+---
+faction, _ = UnitFactionGroup("player");
 --- TECH-001 :
 -- Create hidden frame attached to UIParent for secure hiding ui elements
 STAYFOCUSED_HIDE = CreateFrame("FRAME", "STAYFOCUSED_HIDE", UIParent);
@@ -218,8 +221,32 @@ end;
 -- Add a centralized function witch send as a raid warning with message, sender, canal, sound options
 -- Associated with FUNC-005
 function SendAs(message, sender, canal, sound)
-    name = string.gsub(sender, "-%" .. string.gsub(GetRealmName(), " ", ""), "");
-    RaidNotice_AddMessage(RaidWarningFrame, "\\" .. canal .. " [" .. date("%H:%M") .. " " .. name .. "] " .. message, ChatTypeInfo[canal]);
+	local chan =nil
+	if canal == "BG_SYSTEM_ALLIANCE" or canal == "BG_SYSTEM_HORDE" or canal == "BG_SYSTEM_NEUTRAL" or canal == "INSTANCE_CHAT" or canal == "INSTANCE_CHAT_LEADER" then
+		chan = "I "
+	end;
+	if canal == "PARTY" or canal == "PARTY_LEADER" then
+		chan = "P "
+	end;
+	if canal == "RAID" or canal == "RAID_LEADER" then
+		chan = "R "
+	end;
+	if canal == "BN_WHISPER" or canal == "WHISPER" then
+		chan = "W "
+	end;
+	if canal == "GUILD" then
+		chan = "G "
+	end;
+	if canal == "OFFICER" then
+		chan = "O "
+	end;
+	local colorCode = RGBTableToColorCode(ChatTypeInfo[canal])
+	if sender ~= nil then
+    name = chan .. "[".. string.gsub(sender, "-%" .. string.gsub(GetRealmName(), " ", ""), "").. "] ";
+    RaidNotice_AddMessage(RaidWarningFrame, colorCode .. name .. message .."|r", ChatTypeInfo["RAID"]);
+	else
+    RaidNotice_AddMessage(RaidWarningFrame, colorCode .. chan .. message .."|r", ChatTypeInfo["RAID"]);
+	end
     if sound ~= nil then
         PlaySoundFile(sound, "Master");
     end;
@@ -395,7 +422,26 @@ hooksecurefunc(ObjectiveTrackerFrame, "SetPoint", function(self, anchorpoint, re
     self:SetHeight(GetScreenHeight() * .75);
 end);
 --- MOD-UI-006 :
--- Clean chat frame
+-- Clean chat frame and format
+CHAT_GUILD_GET = "|Hchannel:GUILD|hG|h %s "
+CHAT_OFFICER_GET = "|Hchannel:OFFICER|hO|h %s "
+CHAT_RAID_GET = "|Hchannel:RAID|hR|h %s "
+CHAT_RAID_WARNING_GET = "RW %s "
+CHAT_RAID_LEADER_GET = "|Hchannel:RAID|hR|h %s "
+CHAT_PARTY_GET = "|Hchannel:PARTY|hP|h %s "
+CHAT_PARTY_LEADER_GET =  "|Hchannel:PARTY|hP|h %s "
+CHAT_PARTY_GUIDE_GET =  "|Hchannel:PARTY|hPG|h %s "
+CHAT_INSTANCE_CHAT_GET = "|Hchannel:Battleground|hI|h %s: "
+CHAT_INSTANCE_CHAT_LEADER_GET = "|Hchannel:Battleground|hI|h %s: "
+CHAT_WHISPER_INFORM_GET = "WR %s "
+CHAT_WHISPER_GET = "W %s "
+CHAT_BN_WHISPER_INFORM_GET = "WR %s "
+CHAT_BN_WHISPER_GET = "W %s "
+CHAT_SAY_GET = "%s "
+CHAT_YELL_GET = "%s "
+CHAT_FLAG_AFK = "[AFK] "
+CHAT_FLAG_DND = "[DND] "
+CHAT_FLAG_GM = "[GM] "
 for i = 1, NUM_CHAT_WINDOWS do
     _G["ChatFrame" .. i .. "EditBoxLeft"]:SetAlpha(0);
     _G["ChatFrame" .. i .. "EditBoxRight"]:SetAlpha(0);
@@ -403,6 +449,13 @@ for i = 1, NUM_CHAT_WINDOWS do
     _G["ChatFrame" .. i .. "TabLeft"]:SetAlpha(0);
     _G["ChatFrame" .. i .. "TabRight"]:SetAlpha(0);
     _G["ChatFrame" .. i .. "TabMiddle"]:SetAlpha(0);
+	if ( i ~= 2 ) then
+		local f = _G["ChatFrame"..i]
+		local am = f.AddMessage
+		f.AddMessage = function(frame, text, ...)
+			return am(frame, text:gsub('|h%[(%d+)%. .-%]|h', '|h%1|h'), ...)
+		end
+	end
 end;
 for _, value in ipairs(CHAT_FRAME_TEXTURES) do
     for i = 1, NUM_CHAT_WINDOWS, 1 do
@@ -623,7 +676,6 @@ end;
 -- Replace end caps with customized ones (horde, alliance and neutral)
 function STAYFOCUSEDEVENTS:ADDON_LOADED(...)
     local red, geen, blue;
-    local faction, _ = UnitFactionGroup("player");
     if faction == "Horde" then
         MainMenuBarArtFrame.LeftEndCap:SetTexture("Interface\\AddOns\\StayFocusedUI\\Textures\\endcap horde.png");
         MainMenuBarArtFrame.RightEndCap:SetTexture("Interface\\AddOns\\StayFocusedUI\\Textures\\endcap horde.png");
@@ -649,11 +701,8 @@ function STAYFOCUSEDEVENTS:ADDON_LOADED(...)
         MainMenuBarArtFrame.RightEndCap:SetScale(1)
 		MainMenuBarArtFrameBackground.BackgroundSmall:SetDrawLayer("ARTWORK",1)
 		MainMenuBarArtFrame.RightEndCap:SetDrawLayer("ARTWORK",-1)
-		 
        MainMenuBarArtFrame.LeftEndCap:SetPoint("BOTTOM", MainMenuBar, "BOTTOM", 0, 0)
        MainMenuBarArtFrame.RightEndCap:SetPoint("BOTTOM", MainMenuBar, "BOTTOM", 0, 0)
-
-		
     for i, v in pairs({MainMenuBarArtFrameBackground.WatchBar, MainMenuBarArtFrameBackground.BackgroundLarge, MainMenuBarArtFrameBackground.BackgroundSmall, MicroButtonAndBagsBar.MicroBagBar,
        -- ArtifactWatchBar.StatusBar.WatchBarTexture0, ArtifactWatchBar.StatusBar.WatchBarTexture1, ArtifactWatchBar.StatusBar.WatchBarTexture2, ArtifactWatchBar.StatusBar.WatchBarTexture3, ArtifactWatchBar.StatusBar.XPBarTexture0, ArtifactWatchBar.StatusBar.XPBarTexture1,
        -- ArtifactWatchBar.StatusBar.XPBarTexture2, ArtifactWatchBar.StatusBar.XPBarTexture3,
@@ -758,38 +807,47 @@ end;
 --- FUNC-005 :
 -- Send chat messages in raid warning with specific sound (guild, guild officer, instance, instance leader, party, party leader, raid, raid leader, whisper and battle net)
 -- Associated with TECH-006
-function STAYFOCUSEDEVENTS:CHAT_MSG_GUILD(...)
-    SendAs(select(1, ...), select(5, ...), "GUILD", "Interface\\AddOns\\StayFocusedUI\\Sounds\\chat_g.ogg");
+function STAYFOCUSEDEVENTS:CHAT_MSG_BG_SYSTEM_ALLIANCE(...)
+    SendAs(select(1, ...), select(5, ...), "BG_SYSTEM_ALLIANCE", "Interface\\AddOns\\StayFocusedUI\\Sounds\\chat_i.ogg");
 end;
-function STAYFOCUSEDEVENTS:CHAT_MSG_OFFICER(...)
-    SendAs(select(1, ...), select(5, ...), "GUILD", "Interface\\AddOns\\StayFocusedUI\\Sounds\\chat_g.ogg");
+function STAYFOCUSEDEVENTS:CHAT_MSG_BG_SYSTEM_HORDE(...)
+    SendAs(select(1, ...), select(5, ...), "BG_SYSTEM_HORDE", "Interface\\AddOns\\StayFocusedUI\\Sounds\\chat_i.ogg");
+end;
+function STAYFOCUSEDEVENTS:CHAT_MSG_BG_SYSTEM_NEUTRAL(...)
+    SendAs(select(1, ...), select(5, ...), "BG_SYSTEM_NEUTRAL", "Interface\\AddOns\\StayFocusedUI\\Sounds\\chat_i.ogg");
 end;
 function STAYFOCUSEDEVENTS:CHAT_MSG_INSTANCE_CHAT(...)
-    SendAs(select(1, ...), select(5, ...), "PARTY", "Interface\\AddOns\\StayFocusedUI\\Sounds\\chat_i.ogg");
+    SendAs(select(1, ...), select(5, ...), "INSTANCE_CHAT", "Interface\\AddOns\\StayFocusedUI\\Sounds\\chat_i.ogg");
 end;
 function STAYFOCUSEDEVENTS:CHAT_MSG_INSTANCE_CHAT_LEADER(...)
-    SendAs(select(1, ...), select(5, ...), "PARTY", "Interface\\AddOns\\StayFocusedUI\\Sounds\\chat_i.ogg");
+    SendAs(select(1, ...), select(5, ...), "INSTANCE_CHAT_LEADER", "Interface\\AddOns\\StayFocusedUI\\Sounds\\chat_i.ogg");
 end;
 function STAYFOCUSEDEVENTS:CHAT_MSG_PARTY(...)
     SendAs(select(1, ...), select(5, ...), "PARTY", "Interface\\AddOns\\StayFocusedUI\\Sounds\\chat_i.ogg");
 end;
 function STAYFOCUSEDEVENTS:CHAT_MSG_PARTY_LEADER(...)
-    SendAs(select(1, ...), select(5, ...), "PARTY", "Interface\\AddOns\\StayFocusedUI\\Sounds\\chat_i.ogg");
+    SendAs(select(1, ...), select(5, ...), "PARTY_LEADER", "Interface\\AddOns\\StayFocusedUI\\Sounds\\chat_i.ogg");
 end;
 function STAYFOCUSEDEVENTS:CHAT_MSG_RAID(...)
     SendAs(select(1, ...), select(5, ...), "RAID", "Interface\\AddOns\\StayFocusedUI\\Sounds\\chat_i.ogg");
 end;
 function STAYFOCUSEDEVENTS:CHAT_MSG_RAID_LEADER(...)
-    SendAs(select(1, ...), select(5, ...), "RAID", "Interface\\AddOns\\StayFocusedUI\\Sounds\\chat_i.ogg");
-end;
-function STAYFOCUSEDEVENTS:CHAT_MSG_BN_INLINE_TOAST_BROADCAST(...)
-    SendAs(select(1, ...), select(5, ...), "BN_WHISPER", "Interface\\AddOns\\StayFocusedUI\\Sounds\\chat_w.ogg");
+    SendAs(select(1, ...), select(5, ...), "RAID_LEADER", "Interface\\AddOns\\StayFocusedUI\\Sounds\\chat_i.ogg");
 end;
 function STAYFOCUSEDEVENTS:CHAT_MSG_BN_WHISPER(...)
     SendAs(select(1, ...), select(5, ...), "BN_WHISPER", "Interface\\AddOns\\StayFocusedUI\\Sounds\\chat_w.ogg");
 end;
 function STAYFOCUSEDEVENTS:CHAT_MSG_WHISPER(...)
     SendAs(select(1, ...), select(5, ...), "WHISPER", "Interface\\AddOns\\StayFocusedUI\\Sounds\\chat_w.ogg");
+end;
+function STAYFOCUSEDEVENTS:CHAT_MSG_GUILD(...)
+    SendAs(select(1, ...), select(2, ...), "GUILD", "Interface\\AddOns\\StayFocusedUI\\Sounds\\chat_g.ogg");
+end;
+function STAYFOCUSEDEVENTS:CHAT_MSG_OFFICER(...)
+    SendAs(select(1, ...), select(2, ...), "OFFICER", "Interface\\AddOns\\StayFocusedUI\\Sounds\\chat_g.ogg");
+end;
+function STAYFOCUSEDEVENTS:CHAT_MSG_TARGETICONS(...)
+    SendAs(select(1, ...), nil, "TARGETICONS", nil);
 end;
 --- MOD-UI-020 :
 -- Show paper doll item level
@@ -1445,8 +1503,8 @@ end);
 STAYFOCUSED:SetScript("OnEvent", function(self, event, ...)
     STAYFOCUSEDEVENTS[event](self, ...);
 	-- debug
-	-- arg1, arg2, arg3, arg4, arg5,arg6, arg7, arg8, arg9 = select(1, ...), select(2, ...), select(3, ...), select(4, ...), select(5, ...), select(6, ...), select(7, ...), select(8, ...), select(9, ...)
-	-- print(tostring(event).."-arg1-"..tostring(arg1).."-arg2-"..tostring(arg2).."-arg3-"..tostring(arg3).."-arg4-"..tostring(arg4).."-arg5-"..tostring(arg5).."-arg6-"..tostring(arg6).."-arg7-"..tostring(arg7).."-arg8-"..tostring(arg8).."-arg9-"..tostring(arg9))
+	 arg1, arg2, arg3, arg4, arg5,arg6, arg7, arg8, arg9 = select(1, ...), select(2, ...), select(3, ...), select(4, ...), select(5, ...), select(6, ...), select(7, ...), select(8, ...), select(9, ...)
+	 print(tostring(event).."-arg1-"..tostring(arg1).."-arg2-"..tostring(arg2).."-arg3-"..tostring(arg3).."-arg4-"..tostring(arg4).."-arg5-"..tostring(arg5).."-arg6-"..tostring(arg6).."-arg7-"..tostring(arg7).."-arg8-"..tostring(arg8).."-arg9-"..tostring(arg9))
 end);
 for k, _ in pairs(STAYFOCUSEDEVENTS) do
     STAYFOCUSED:RegisterEvent(k);
